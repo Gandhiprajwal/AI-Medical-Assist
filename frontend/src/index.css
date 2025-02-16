@@ -1,1 +1,59 @@
 @import "tailwindcss";
+
+body {
+  font-family: "Inter", serif;
+}
+
+.inter-bold {
+  font-weight: 700;
+}
+
+.inter-normal {
+  font-weight: 400;
+}
+
+.inter-light {
+  font-weight: 300;
+}
+
+.inter-medium {
+  font-weight: 500;
+}
+
+.inter-semibold {
+  font-weight: 600;
+}
+
+.inter-extrabold {
+  font-weight: 800;
+}
+
+.inter-black {
+  font-weight: 900;
+}
+
+.inter-italic {
+  font-style: italic;
+}
+
+.inter-underline {
+  text-decoration: underline;
+}
+
+.inter-overline {
+  text-decoration: overline;
+}
+
+.inter-line-through {
+  text-decoration: line-through;
+}
+
+.inter-uppercase {
+  text-transform: uppercase;
+}
+
+.inter-lowercase {
+  text-transform: lowercase;
+}
+
+
