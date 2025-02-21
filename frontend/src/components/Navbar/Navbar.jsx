@@ -19,7 +19,7 @@ const Navbar = () => {
   }, [isHovered]);
 
   return (
-    <nav className="h-20 bg-white flex justify-between items-center px-4 shadow-md w-full">
+    <nav className="h-20 bg-white flex justify-between items-center px-4 drop-shadow-md w-full">
       {/* Left Section (Logo & Title) */}
       <motion.div
         className="flex flex-row items-center md:w-1/3"
