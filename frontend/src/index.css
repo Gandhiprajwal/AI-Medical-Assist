@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+html,
 body {
   font-family: "Inter", serif;
 }
@@ -55,5 +56,3 @@ body {
 .inter-lowercase {
   text-transform: lowercase;
 }
-
-
