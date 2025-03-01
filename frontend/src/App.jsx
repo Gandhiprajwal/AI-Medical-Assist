@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import { PredictHealth } from "./pages/PredictHealth/PredictHealth";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Findadoctor from "./components/FindADoctor/Findadoctor";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/predict-health" element={<PredictHealth />} />
-          <Route path="/find-a-doctor" element={<>Find a Doctor</>} />
+          <Route path="/find-a-doctor" element={<Findadoctor/>} />
           <Route path="/feedback" element={<>Feedback</>} />
           <Route path="/sign-in" element={<>Sign In</>} />
           <Route path="/sign-up" element={<>Sign Up</>} />
