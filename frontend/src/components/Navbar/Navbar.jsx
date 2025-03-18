@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "../../assets/Logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,8 +30,8 @@ const Navbar = () => {
       >
         <Link to="/">
           <img
-            src="https://s3-alpha-sig.figma.com/img/0f12/6f7d/97d9f3a49b4fe11b53b4752cde1f8282?Expires=1740355200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=j8c9IbcyDponle~WyjPcXYeiCFej0jcdnaSOINl6i7ZsBFC4HdnRL6478lHKlC5glkDaoqASZ8q35FsB~8cAMQbp6yq93Rdd5VAt6ZpgJbhZ2T5fckopOy6yXBYlLukG-HLquxeMTej6Q18~ecTwHraGFBv2LghR5321~x6iu28dTzLQ~OKqXcYJQga7zNwg3VYsD5BHolc3aGZ5VEnNa~T9h-freODyjkIJJ~xij~BgEZ9yLKdtoXxmGKpAUTG7Gbs9mAyrqrh5fniFWpgzqB9Fv~6pggs56y-tU~-s~apFnnvh8UoAYN~7Cf~xOfAYVk~mIlhEdU8uBIL-m1x89A__"
-            alt="AI Medical Assist Logo"
+            src={Logo}
+            alt="Logo"
             className="w-12 md:w-16"
           />
         </Link>
