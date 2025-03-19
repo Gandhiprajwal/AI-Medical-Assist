@@ -109,9 +109,9 @@ const ServicesLayout = ({ services }) => {
         viewport={{ once: true }}
         transition={{ duration: 2 }}
       >
-        <h1 className="text-white text-xl font-medium opacity-80">
+        <h2 className="text-white text-xl font-medium opacity-80">
           More AI Disease Analyzer
-        </h1>
+        </h2>
       </motion.div>
 
       {/* Services Cards Layout */}

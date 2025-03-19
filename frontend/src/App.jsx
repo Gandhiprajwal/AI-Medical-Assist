@@ -5,6 +5,8 @@ import { PredictHealth } from "./pages/PredictHealth/PredictHealth";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Findadoctor from "./components/FindADoctor/Findadoctor";
+import HeartDiseaseAnalyzer from "./components/AdvancedAnalyzers/HeartDiseaseAnalyzer";
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route path="/feedback" element={<>Feedback</>} />
           <Route path="/sign-in" element={<>Sign In</>} />
           <Route path="/sign-up" element={<>Sign Up</>} />
+          <Route path="/heart-disease-analyzer" element={<HeartDiseaseAnalyzer />} />
         </Routes>
         <Footer />
       </BrowserRouter>

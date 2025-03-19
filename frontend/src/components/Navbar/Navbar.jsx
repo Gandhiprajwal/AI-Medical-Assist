@@ -20,7 +20,7 @@ const Navbar = () => {
   }, [isHovered]);
 
   return (
-    <nav className="h-20 bg-white flex justify-between items-center px-4 drop-shadow-md w-full">
+    <nav className="h-20 bg-white flex justify-between items-center px-8 drop-shadow-md w-full">
       {/* Left Section (Logo & Title) */}
       <motion.div
         className="flex flex-row items-center md:w-1/3"
@@ -32,7 +32,7 @@ const Navbar = () => {
           <img
             src={Logo}
             alt="Logo"
-            className="w-12 md:w-16"
+            className="w-10 md:w-10"
           />
         </Link>
         <motion.div
@@ -41,9 +41,6 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <p className="text-xs md:text-sm text-gray-500 text-center">
-            WELCOME TO
-          </p>
           <p className="text-sm md:text-md font-semibold">
             <span className="text-[#2E93B1]">AI</span>{" "}
             <span className="text-[#0C8667]">MEDICAL</span>{" "}
