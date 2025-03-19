@@ -47,10 +47,12 @@ const HeartDiseaseAnalyzer = () => {
   };
 
   return (
-    <section className="opacity-95 w-full h-132 py-12 pt-10 px-20 bg-[#81B4B2] bg-cover bg-center overflow-y-auto" style={{
+    <section className="opacity-95 w-full h-132 py-5 pb-8 px-20 bg-[#81B4B2] bg-cover bg-center overflow-y-auto" style={{
         backgroundImage: `url(${bgImage})`,
       }}>
-    <div className="w-full h-full p-8 pt-3 border rounded-3xl shadow-lg bg-black opacity-90 text-white">
+    <div className="w-full h-full p-8 pt-3 border-1 border-[#000443] rounded-3xl shadow-lg bg-[#000433]/90 text-white" style={{
+    boxShadow: "8px 8px 4px rgba(129, 185, 192, 0.57)",
+  }}>
       <h2 className="text-2xl font-bold text-center mb-4">Heart Disease Analyzer</h2>
       <form onSubmit={handleSubmit} className="flex gap-4">
         <div className="flex flex-col gap-4 w-1/2">
@@ -75,11 +77,11 @@ const HeartDiseaseAnalyzer = () => {
                 name="gender"
                 value={inputData.gender}
                 onChange={handleInputChange}
-                className="w-full border p-2 rounded bg-black"
+                className="w-full border p-2 rounded"
               >
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option className="text-black" value="">Select Gender</option>
+                <option className="text-black" value="male">Male</option>
+                <option className="text-black" value="female">Female</option>
               </select>
             </div>
           </div>
@@ -126,7 +128,7 @@ const HeartDiseaseAnalyzer = () => {
         </div>
         </div>
 
-        <div className="border-l flex flex-col pl-3 gap-4 w-1/2">
+        <div className="border-l flex flex-col pl-8 gap-4 w-1/2">
         {/* Lifestyle and Medical History Section */}
         <div>
           <h2 className="text-lg font-semibold mb-3">Lifestyle & Medical History</h2>
