@@ -7,7 +7,7 @@ import Footer from "./components/Footer/Footer";
 import Findadoctor from "./components/FindADoctor/Findadoctor";
 import HeartDiseaseAnalyzer from "./components/AdvancedAnalyzers/HeartDiseaseAnalyzer";
 import LiverDiseaseAnalyzer from "./components/AdvancedAnalyzers/LiverDiseaseAnalyzer";
-
+import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   return (
@@ -17,16 +17,21 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/predict-health" element={<PredictHealth />} />
-          <Route path="/find-a-doctor" element={<Findadoctor/>} />
+          <Route path="/find-a-doctor" element={<Findadoctor />} />
           <Route path="/feedback" element={<>Feedback</>} />
           <Route path="/sign-in" element={<>Sign In</>} />
-          <Route path="/sign-up" element={<>Sign Up</>} />
-          <Route path="/heart-disease-analyzer" element={<HeartDiseaseAnalyzer />} />
-          <Route path="/liver-disease-analyzer" element={<LiverDiseaseAnalyzer />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route
+            path="/heart-disease-analyzer"
+            element={<HeartDiseaseAnalyzer />}
+          />
+          <Route
+            path="/liver-disease-analyzer"
+            element={<LiverDiseaseAnalyzer />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
-      
     </>
   );
 }
