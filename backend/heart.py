@@ -1,44 +1,66 @@
-# heart_predict.py
 import sys
 import numpy as np
+import pandas as pd
 import joblib
 import json
 
-# Step 1: Load the model and scaler
-model = joblib.load('./aimodels/heart.pkl')
-scaler = joblib.load('./aimodels/heart_scaler.pkl')
+# Step 1: Validate input arguments
+if len(sys.argv) < 2:
+    print(json.dumps({"error": "No input data provided"}))
+    sys.exit(1)
 
-# Step 2: Load data from sys.argv and convert it to list of values
-data_dict = json.loads(sys.argv[1])  # Expecting JSON string as first argument
-data_list = list(data_dict.values())
+# Step 2: Read and debug input
+raw_input = sys.argv[1]
 
-# Step 3: Identify continuous columns
-continuous_cols = ['Age', 'Heart rate', 'Systolic blood pressure', 'Diastolic blood pressure',
-                   'Blood sugar', 'CK-MB', 'Troponin']
+try:
+    data_dict = json.loads(raw_input)  # Expecting JSON string as input
+except json.JSONDecodeError as e:
+    print(json.dumps({"error": f"Invalid JSON input: {str(e)}"}))
+    sys.exit(1)
 
-# Step 4: Prepare numpy array and scale continuous values
-data_array = np.array(data_list).reshape(1, -1)
+# Step 3: Validate required keys in JSON
+required_keys = ["Age", "Gender", "Heart rate", "Systolic blood pressure", 
+                 "Diastolic blood pressure", "Blood sugar", "CK-MB", "Troponin"]
 
-# Split into continuous and categorical (Gender)
-# Assuming Gender is always at index 1 based on your order
-gender = data_array[0][1]  # Extract gender separately
-continuous_indices = [0, 2, 3, 4, 5, 6, 7]
-continuous_values = data_array[0][continuous_indices].reshape(1, -1)
-scaled_continuous = scaler.transform(continuous_values)
+missing_keys = [key for key in required_keys if key not in data_dict]
+if missing_keys:
+    print(json.dumps({"error": f"Missing keys in input: {missing_keys}"}))
+    sys.exit(1)
 
-# Step 5: Reconstruct final array with scaled values and gender
-# Insert gender value at the correct index (1)
-final_input = np.insert(scaled_continuous, 1, gender, axis=1)
+# Step 4: Load the model and scaler
+try:
+    model = joblib.load('./aimodels/heart.pkl')
+    scaler = joblib.load('./aimodels/heart_scaler.pkl')
+except Exception as e:
+    print(json.dumps({"error": f"Model loading failed: {str(e)}"}))
+    sys.exit(1)
 
-# Step 6: Make prediction
-prediction = model.predict(final_input)
+# Step 5: Convert input to DataFrame to preserve feature names
+try:
+    # Convert input dictionary to DataFrame
+    input_df = pd.DataFrame([data_dict])  
 
-# Step 7: Convert prediction to label
-def convert_int_category(pred):
-    mapping = {0: "negative", 1: "positive"}
-    return mapping.get(pred)
+    # Separate categorical and continuous features
+    categorical_cols = ["Gender"]
+    continuous_cols = ["Age", "Heart rate", "Systolic blood pressure", "Diastolic blood pressure",
+                       "Blood sugar", "CK-MB", "Troponin"]
 
-result = convert_int_category(prediction[0])
+    # Scale only continuous features
+    input_df[continuous_cols] = scaler.transform(input_df[continuous_cols])
 
-# Step 8: Output result
-print(json.dumps({"prediction": result}))
+    # Make prediction
+    prediction = model.predict(input_df)
+
+    # Convert prediction to label
+    def convert_int_category(pred):
+        mapping = {0: "negative", 1: "positive"}
+        return mapping.get(pred, "unknown")
+
+    result = convert_int_category(prediction[0])
+
+    # Output result
+    print(json.dumps({"prediction": result}))
+
+except Exception as e:
+    print(json.dumps({"error": f"Processing error: {str(e)}"}))
+    sys.exit(1)
