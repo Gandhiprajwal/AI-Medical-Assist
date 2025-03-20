@@ -48,7 +48,7 @@ const LiverDiseaseAnalyzer = () => {
 
   return (
     <section
-      className="w-full h-132 py-6 pt-4 px-16 bg-[#81B4B2]/75 bg-cover bg-center overflow-y-auto"
+      className="w-full h-128 py-6 pt-4 px-16 bg-[#81B4B2]/75 bg-cover bg-center overflow-y-auto"
       style={{
         backgroundImage: `url(${bgImage})`,
       }}

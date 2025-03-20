@@ -51,14 +51,14 @@ export const PredictHealth = () => {
     style={{ backgroundImage: `url('/image3.png')` }} // Replace with your image path 
   >
     {/* Translucent Card Container */}
-    <div className="w-[1111px] h-96 bg-[rgba(0,0,0,0.25)] rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center justify-center p-8">
+    <div className="w-[1111px] h-96 bg-[rgba(0,0,0,0.25)] rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center p-8" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.57)", }}>
       <h2 className="text-white text-3xl font-bold mb-4">AI Health Check</h2>
 
       {/* Input Field */}
       <div className="w-full flex flex-col items-center space-y-4">
       <input
         type="text"
-        className="p-3 rounded-xl w-[80%] text-black placeholder-white-300 bg-white/30 border border-blue outline-none"
+        className="p-3 rounded-xl w-[60%] text-black placeholder-white-300 bg-white outline-none" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}
         id="symptoms"
         name="symptoms"
         placeholder="Describe how you feel - Enter your symptoms"
@@ -70,7 +70,7 @@ export const PredictHealth = () => {
       <button
         type="submit"
         onClick={handlePrediction}
-        className="bg-cyan-600 hover:bg-cyan-600 transition-all duration-300 text-white font-bold py-2 px-8 rounded-xl"
+        className="border bg-cyan-600 hover:cursor-pointer duration-300 text-white font-bold py-2 px-8 rounded-lg hover:scale-105 hover:opacity-60" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}
         disabled={isLoading}
       >
         {isLoading ? "Predicting..." : "Predict"}

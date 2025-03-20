@@ -47,7 +47,7 @@ const HeartDiseaseAnalyzer = () => {
   };
 
   return (
-    <section className="opacity-95 w-full h-132 py-5 pb-8 px-20 bg-[#81B4B2] bg-cover bg-center overflow-y-auto" style={{
+    <section className="opacity-95 w-full h-128 py-5 pb-8 px-20 bg-[#81B4B2] bg-cover bg-center overflow-y-auto" style={{
         backgroundImage: `url(${bgImage})`,
       }}>
     <div className="w-full h-full p-8 pt-3 border-1 border-[#000443] rounded-3xl shadow-lg bg-[#000433]/90 text-white" style={{

@@ -5,15 +5,17 @@ import { PredictHealth } from "./pages/PredictHealth/PredictHealth";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Findadoctor from "./components/FindADoctor/Findadoctor";
-import HeartDiseaseAnalyzer from "./components/AdvancedAnalyzers/HeartDiseaseAnalyzer";
-import LiverDiseaseAnalyzer from "./components/AdvancedAnalyzers/LiverDiseaseAnalyzer";
+import HeartDiseaseAnalyzer from "./pages/HeartDiseaseAnalyzer/HeartDiseaseAnalyzer";
+import LiverDiseaseAnalyzer from "./pages/LiverDiseaseAnalyzer/LiverDiseaseAnalyzer";
 import SignUp from "./pages/SignUp/SignUp";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Navbar />
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/predict-health" element={<PredictHealth />} />
