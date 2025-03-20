@@ -20,7 +20,7 @@ const USP = ({ img, title, textColor }) => {
         transition={{ duration: 0.4 }}
       />
       <motion.h1
-        className="text-lg md:text-xl font-normal"
+        className="text-lg md:text-md font-normal"
         style={{ color: textColor }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
