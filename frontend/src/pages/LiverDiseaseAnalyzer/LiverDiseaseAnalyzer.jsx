@@ -42,7 +42,9 @@ const LiverDiseaseAnalyzer = () => {
 
     try {
       const response = await axios.post(`${BASE_URL}/liver`, inputData);
+      // console.log(response.data.prediction);
       setPrediction(response.data.prediction);
+      // console.log(prediction);
     } catch (error) {
       console.error("Error during prediction:", error);
     }
@@ -253,11 +255,11 @@ const LiverDiseaseAnalyzer = () => {
         {prediction !== null && (
           <div
             className={`mt-6 p-4 rounded text-center ${
-              prediction === "[1]" ? "bg-red-400" : "bg-green-400"
+              prediction === 1 ? "bg-red-400" : "bg-green-400"
             }`}
           >
             <h3 className="text-lg font-bold">
-              {prediction === "[1]"
+              {prediction === 1
                 ? "High Risk! Please consult a doctor immediately."
                 : "Low Risk! You're in good health."}
             </h3>
