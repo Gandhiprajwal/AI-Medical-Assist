@@ -5,19 +5,10 @@ import healthRoute from "./Routes/healthPredict.js";
 
 
 const app = express();
-<<<<<<< HEAD
-const PORT = process.env.PORT || 8001;
-
-const corsOptions = {
-  origin: true,
-};
-
-=======
 const path = require("path");
 const { spawn } = require("child_process");
 
 const PORT = 3000;
->>>>>>> prajwal
 
 // Ensure correct paths to AI models
 const heartModel = "D:\\AI-MedLab\\backend\\aimodels\\heart.pkl";
@@ -155,21 +146,7 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-<<<<<<< HEAD
-
-// middleware
-app.use(express.json());
-app.use(cookieParser());
-app.use(cors(corsOptions));
-app.use("/api/v1/", healthRoute);
-
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-=======
 // Start Server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
 });
->>>>>>> prajwal
