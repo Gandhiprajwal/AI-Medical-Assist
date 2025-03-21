@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const { spawn } = require("child_process");
+const cors = require("cors");
 
 const PORT = 3000;
+// app.use(express.json());
 
 // Ensure correct paths to AI models
 const heartModel = "D:\\AI-MedLab\\backend\\aimodels\\heart.pkl";
@@ -19,12 +21,21 @@ const GLOBAL_PYTHON_PATH = "python"; // Use system Python as a fallback
 // Check if Python executable exists
 const fs = require("fs");
 if (!fs.existsSync(PYTHON_PATH)) {
-  console.warn("⚠️ Virtual environment not found, using system Python instead.");
+  console.warn(
+    "⚠️ Virtual environment not found, using system Python instead."
+  );
   PYTHON_PATH = GLOBAL_PYTHON_PATH;
 }
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Frontend URL
+    credentials: true, // Allows sending cookies/auth tokens
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  })
+);
 
 // Function to handle AI model predictions
 const runPythonScript = (res, scriptPath, modelPath, inputData) => {
@@ -32,6 +43,7 @@ const runPythonScript = (res, scriptPath, modelPath, inputData) => {
     if (!inputData) {
       return res.status(400).json({ error: "Missing input data" });
     }
+    // console.log(inputData);
 
     const pythonProcess = spawn(PYTHON_PATH, [
       scriptPath,
@@ -95,14 +107,29 @@ const runPythonScript = (res, scriptPath, modelPath, inputData) => {
 
 // Route for Liver Prediction
 app.post("/api/v1/liver", (req, res) => {
-  console.log("Received liver request with data:", req.body);
-  runPythonScript(res, pythonScriptPathForLiver, liverModel, req.body.data);
+  // console.log("Received liver request with data:", req.body);
+  const inputData = req.body;
+  // Transform the data
+  const formattedData = {
+    Age: Number(inputData.age),
+    Gender: inputData.gender === "0" ? "Female" : "Male",
+    TB: parseFloat(inputData.totalBilirubin),
+    DB: parseFloat(inputData.directBilirubin),
+    Alkphos: parseInt(inputData.alkalinePhosphotase),
+    Sgpt: parseInt(inputData.alamineAminotransferase),
+    Sgot: parseInt(inputData.aspartateAminotransferase),
+    TP: parseFloat(inputData.totalProteins),
+    ALB: parseFloat(inputData.albumin),
+    "A/G Ratio": parseFloat(inputData.albuminGlobulinRatio),
+  };
+  console.log(formattedData)
+  runPythonScript(res, pythonScriptPathForLiver, liverModel, formattedData);
 });
 app.post("/api/v1/heart", (req, res) => {
   const inputData = req.body; // Extract JSON input from request
 
   if (!inputData) {
-      return res.status(400).json({ error: "No input data provided" });
+    return res.status(400).json({ error: "No input data provided" });
   }
 
   // Convert to JSON string
@@ -115,24 +142,24 @@ app.post("/api/v1/heart", (req, res) => {
   let error = "";
 
   pythonProcess.stdout.on("data", (data) => {
-      result += data.toString();
+    result += data.toString();
   });
 
   pythonProcess.stderr.on("data", (data) => {
-      error += data.toString();
+    error += data.toString();
   });
 
   pythonProcess.on("close", (code) => {
-      if (error) {
-          res.status(500).json({ error });
-      } else {
-          try {
-              const parsedResult = JSON.parse(result);
-              res.json(parsedResult);
-          } catch (parseError) {
-              res.status(500).json({ error: "Invalid response from Python" });
-          }
+    if (error) {
+      res.status(500).json({ error });
+    } else {
+      try {
+        const parsedResult = JSON.parse(result);
+        res.json(parsedResult);
+      } catch (parseError) {
+        res.status(500).json({ error: "Invalid response from Python" });
       }
+    }
   });
 });
 
