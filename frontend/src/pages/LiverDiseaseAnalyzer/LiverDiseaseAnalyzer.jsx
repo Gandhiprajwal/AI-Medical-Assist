@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import bgImage from "../../assets/Liverbgimg.gif"; // Replace with your liver-specific background image path
-// import axios from "axios";
-// import { BASE_URL } from "../../../config";
+import axios from "axios";
+import { BASE_URL } from "../../config";
 
 const LiverDiseaseAnalyzer = () => {
   // State for input data
@@ -32,7 +32,9 @@ const LiverDiseaseAnalyzer = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isFormComplete = Object.values(inputData).every((field) => field !== "");
+    const isFormComplete = Object.values(inputData).every(
+      (field) => field !== ""
+    );
     if (!isFormComplete) {
       setFormError("Please fill out all fields.");
       return;
@@ -53,10 +55,15 @@ const LiverDiseaseAnalyzer = () => {
         backgroundImage: `url(${bgImage})`,
       }}
     >
-      <div className="w-full h-full p-8 pt-3 rounded-3xl shadow-lg border-1 border-red-200 bg-[#250902]/93 text-white" style={{
-    boxShadow: "8px 8px 4px rgba(183, 28, 28, 0.57)",
-  }}>
-        <h2 className="text-2xl font-bold text-center mb-4">Liver Disease Analyzer</h2>
+      <div
+        className="w-full h-full p-8 pt-3 rounded-3xl shadow-lg border-1 border-red-200 bg-[#250902]/93 text-white"
+        style={{
+          boxShadow: "8px 8px 4px rgba(183, 28, 28, 0.57)",
+        }}
+      >
+        <h2 className="text-2xl font-bold text-center mb-4">
+          Liver Disease Analyzer
+        </h2>
         <form onSubmit={handleSubmit} className="flex gap-4">
           {/* Left Column */}
           <div className="flex flex-col gap-4 w-1/2 pr-2">
@@ -83,9 +90,15 @@ const LiverDiseaseAnalyzer = () => {
                     onChange={handleInputChange}
                     className="w-full border p-2 rounded"
                   >
-                    <option className="text-black" value="">Select Gender</option>
-                    <option className="text-black" value="1">Male</option>
-                    <option className="text-black" value="0">Female</option>
+                    <option className="text-black" value="">
+                      Select Gender
+                    </option>
+                    <option className="text-black" value="1">
+                      Male
+                    </option>
+                    <option className="text-black" value="0">
+                      Female
+                    </option>
                   </select>
                 </div>
               </div>
@@ -93,10 +106,14 @@ const LiverDiseaseAnalyzer = () => {
 
             {/* Liver Health Parameters Section */}
             <div className="pb-4 flex flex-col">
-              <h2 className="text-lg font-semibold mb-3">Liver Health Parameters</h2>
+              <h2 className="text-lg font-semibold mb-3">
+                Liver Health Parameters
+              </h2>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium">Total Bilirubin:</label>
+                  <label className="block text-sm font-medium">
+                    Total Bilirubin:
+                  </label>
                   <input
                     type="number"
                     name="totalBilirubin"
@@ -107,7 +124,9 @@ const LiverDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium">Direct Bilirubin:</label>
+                  <label className="block text-sm font-medium">
+                    Direct Bilirubin:
+                  </label>
                   <input
                     type="number"
                     name="directBilirubin"
@@ -118,7 +137,9 @@ const LiverDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium">Alkaline Phosphotase:</label>
+                  <label className="block text-sm font-medium">
+                    Alkaline Phosphotase:
+                  </label>
                   <input
                     type="number"
                     name="alkalinePhosphotase"
@@ -139,7 +160,9 @@ const LiverDiseaseAnalyzer = () => {
               <h2 className="text-lg font-semibold mb-3">Liver Enzymes</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium">Alamine Aminotransferase:</label>
+                  <label className="block text-sm font-medium">
+                    Alamine Aminotransferase:
+                  </label>
                   <input
                     type="number"
                     name="alamineAminotransferase"
@@ -150,7 +173,9 @@ const LiverDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium">Aspartate Aminotransferase:</label>
+                  <label className="block text-sm font-medium">
+                    Aspartate Aminotransferase:
+                  </label>
                   <input
                     type="number"
                     name="aspartateAminotransferase"
@@ -165,10 +190,14 @@ const LiverDiseaseAnalyzer = () => {
 
             {/* Protein and Albumin Section */}
             <div>
-              <h2 className="text-lg font-semibold mb-3">Protein and Albumin Levels</h2>
+              <h2 className="text-lg font-semibold mb-3">
+                Protein and Albumin Levels
+              </h2>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium">Total Proteins:</label>
+                  <label className="block text-sm font-medium">
+                    Total Proteins:
+                  </label>
                   <input
                     type="number"
                     name="totalProteins"
@@ -190,7 +219,9 @@ const LiverDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium">Albumin and Globulin Ratio:</label>
+                  <label className="block text-sm font-medium">
+                    Albumin and Globulin Ratio:
+                  </label>
                   <input
                     type="number"
                     name="albuminGlobulinRatio"

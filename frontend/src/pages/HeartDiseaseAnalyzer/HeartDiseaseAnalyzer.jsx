@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import bgImage from "../../assets/heartbgimg3.gif"
-// import axios from "axios";
-// import { BASE_URL } from "../../../config";
+import axios from "axios";
+import { BASE_URL } from "../../config";
 
 const HeartDiseaseAnalyzer = () => {
   // State for input data
