@@ -1,9 +1,4 @@
-import express from "express";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import healthRoute from "./Routes/healthPredict.js";
-
-
+const express = require("express");
 const app = express();
 const path = require("path");
 const { spawn } = require("child_process");
