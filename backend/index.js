@@ -125,6 +125,8 @@ app.post("/api/v1/liver", (req, res) => {
   console.log(formattedData)
   runPythonScript(res, pythonScriptPathForLiver, liverModel, formattedData);
 });
+
+
 app.post("/api/v1/heart", (req, res) => {
   const inputData = req.body; // Extract JSON input from request
 
