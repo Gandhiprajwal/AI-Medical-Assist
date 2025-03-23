@@ -1,5 +1,5 @@
-import express from "express";
-import { spawn } from "child_process";
+const express = require("express")
+const { spawn } = require("child_process");
 const router = express.Router({ mergeParams: true });
 
 const pythonScriptPathForSymptoms = "symptoms.py";
@@ -60,4 +60,4 @@ router.post("/symptoms", (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

@@ -3,7 +3,7 @@ const app = express();
 const path = require("path");
 const { spawn } = require("child_process");
 const cors = require("cors");
-
+const healthPredictRouter = require("./Routes/healthPredict.js");
 const PORT = 3000;
 // app.use(express.json());
 
@@ -20,6 +20,7 @@ const GLOBAL_PYTHON_PATH = "python"; // Use system Python as a fallback
 
 // Check if Python executable exists
 const fs = require("fs");
+const { default: router } = require("./Routes/healthPredict");
 if (!fs.existsSync(PYTHON_PATH)) {
   console.warn(
     "⚠️ Virtual environment not found, using system Python instead."
@@ -105,7 +106,10 @@ const runPythonScript = (res, scriptPath, modelPath, inputData) => {
 //   runPythonScript(res, pythonScriptPathForHeart, heartModel, req.body.data);
 // });
 
-// Route for Liver Prediction
+// not working ❌❌
+// app.use("/api/v1", healthPredictRouter);
+
+// Route for Liver Prediction 🟢🟢
 app.post("/api/v1/liver", (req, res) => {
   // console.log("Received liver request with data:", req.body);
   const inputData = req.body;
@@ -122,9 +126,11 @@ app.post("/api/v1/liver", (req, res) => {
     ALB: parseFloat(inputData.albumin),
     "A/G Ratio": parseFloat(inputData.albuminGlobulinRatio),
   };
-  console.log(formattedData)
+  console.log(formattedData);
   runPythonScript(res, pythonScriptPathForLiver, liverModel, formattedData);
 });
+
+// heart api 🟢🟢
 app.post("/api/v1/heart", (req, res) => {
   const inputData = req.body; // Extract JSON input from request
 
@@ -132,8 +138,20 @@ app.post("/api/v1/heart", (req, res) => {
     return res.status(400).json({ error: "No input data provided" });
   }
 
+  // Convert frontend data to required format
+  const formattedData = {
+    Age: parseInt(req.body.age, 10),
+    Gender: req.body.gender.toLowerCase() === "male" ? 1 : 0, // Assuming 1 for male, 0 for female
+    "Heart rate": parseInt(req.body.heartRate, 10),
+    "Systolic blood pressure": parseInt(req.body.systolicBP, 10),
+    "Diastolic blood pressure": parseInt(req.body.diastolicBP, 10),
+    "Blood sugar": parseInt(req.body.bloodSugar, 10),
+    "CK-MB": parseInt(req.body.ckmb, 10),
+    Troponin: parseFloat(req.body.troponin),
+  };
+
   // Convert to JSON string
-  const jsonString = JSON.stringify(inputData);
+  const jsonString = JSON.stringify(formattedData);
 
   // Spawn Python process
   const pythonProcess = spawn("python", ["heart.py", jsonString]);
