@@ -90,9 +90,9 @@ const Home = () => {
               </div>
 
               {/* Mobile Image */}
-              <div className="pb-4 md:hidden">
+              {/* <div className="pb-4 md:hidden">
                 <img src="./doctor-image.png" alt="doctor-image" />
-              </div>
+              </div> */}
 
               {/* Description Section */}
               <div className="md:text-left md:w-2/3 py-8">
@@ -114,18 +114,16 @@ const Home = () => {
                   Book a Doctor Appointment
                 </Link>
               </div>
-            </div>
-          </div>
-          <div className="flex w-2/5 h-4/5 absolute right-0 bottom-3">
-            <img src={DoctorImageHomePage} className="mt-4" alt="doctor-image" style={{
+            <img src={DoctorImageHomePage} className="absolute bottom-1 right-0" alt="doctor-image" style={{
               objectFit: "cover",
-              width: "100%",
-              height: "100%",
+              width: "35%",
+              height: "70%",
             }} />
+            </div>
           </div>
         </div>
         <div
-          className="w-full px-2 py-6 flex flex-wrap justify-center justify-between gap-4 md:items-center md:justify-evenly md:flex-row"
+          className="w-full px-2 py-6 flex flex-wrap justify-center justify-between gap-4 md:items-center md:justify-evenly md:flex-row z-index-5"
           style={{ backgroundColor: "rgba(255, 255, 255, 0.80)" }}
         >
           {usp.map((item, key) => (

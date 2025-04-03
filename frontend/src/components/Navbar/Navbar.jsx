@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../../assets/Logo.png";
+import Logo2 from "../../assets/Logo-removebg.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,7 @@ const Navbar = () => {
   }, [isHovered]);
 
   return (
-    <nav className="h-20 bg-white flex justify-between items-center px-8 drop-shadow-md w-full">
+    <nav className="h-20 bg-white dark:bg-[#000000] flex justify-between items-center px-8 drop-shadow-md w-full">
       {/* Left Section (Logo & Title) */}
       <motion.div
         className="flex flex-row items-center md:w-1/3"
@@ -28,31 +29,31 @@ const Navbar = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <Link to="/">
+        <Link to="/" className="flex items-center gap-4">
           <img
             src={Logo}
             alt="Logo"
             className="w-10 md:w-10"
           />
+          <motion.div
+            className="md:hidden lg:block"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <p className="text-sm md:text-md font-semibold">
+              <span className="text-[#2E93B1]">AI</span>{" "}
+              <span className="text-[#0C8667]">MEDICAL</span>{" "}
+              <span className="text-[#2E93B1]">ASSIST</span>
+            </p>
+          </motion.div>
         </Link>
-        <motion.div
-          className="ml-2 md:hidden lg:block"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <p className="text-sm md:text-md font-semibold">
-            <span className="text-[#2E93B1]">AI</span>{" "}
-            <span className="text-[#0C8667]">MEDICAL</span>{" "}
-            <span className="text-[#2E93B1]">ASSIST</span>
-          </p>
-        </motion.div>
-      </motion.div>
 
+      </motion.div>
       {/* Center Section (Navigation Links) */}
       <div className="hidden md:flex justify-center w-full">
         <motion.div
-          className="w-full flex flex-row justify-center lg:gap-12 gap-8 bg-gray-100 p-2 rounded-lg"
+          className="w-full dark:bg-[#1c2029] flex flex-row justify-center lg:gap-12 gap-8 bg-gray-100 p-2 rounded-lg"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -73,14 +74,19 @@ const Navbar = () => {
                 >
                   <Link
                     to={item}
-                    key={index}
-                    className={`text-gray-600  ${
-                      location.pathname === item
-                        ? "font-semibold border-b-2 border-green-700 text-green-700"
-                        : "hover:border-b-2 hover:border-gray-400"
-                    } px-2 text-sm md:text-md`}
+                    className={`text-gray-600 ${location.pathname === item
+                        ? "font-semibold dark:text-[#48A9C5] text-green-700"
+                        : "dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-400"
+                      } text-sm md:text-md`}
                   >
-                    {labels[index]}
+                    <span
+                      className={`border-b-2 ${location.pathname === item
+                          ? "dark:border-[#48A9C5] border-green-700"
+                          : "hover:border-gray-400 border-transparent"
+                        }`}
+                    >
+                      {labels[index]}
+                    </span>
                   </Link>
                 </motion.div>
               );
@@ -91,46 +97,35 @@ const Navbar = () => {
 
       {/* Right Section (Button) */}
       <div className="md:w-1/3 flex justify-end">
-        <motion.div
+        <div
           className="hidden md:block relative"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
-          <Link
-            to={buttonText === "Sign In" ? "/sign-in" : "/sign-up"}
-            className={`text-white px-4 py-2 rounded-md text-md shadow-md font-medium transition-all relative overflow-hidden ${
-              buttonText === "Sign In"
-                ? "bg-[#2E93B1] hover:bg-[#257F96]"
-                : "bg-[#54A4AF] hover:bg-[#54A4AF]"
-            }`}
+          <div
+            className="text-white px-8 py-2 rounded-md text-md shadow-md font-medium transition-all dark:bg-[#286D7C] bg-[#2E93B1] hover:bg-[#257F96] flex items-center space-x-2 whitespace-nowrap"
           >
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={buttonText} // Re-renders on text change
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5 }}
-              >
-                {buttonText}
-              </motion.span>
-            </AnimatePresence>
-          </Link>
-        </motion.div>
-        {/* Mobile Menu Toggle Button */}
-        <motion.button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-3xl text-gray-700 ml-4"
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          {isOpen ? <HiX /> : <HiMenu />}
-        </motion.button>
+            {/* Sign In Link */}
+            <Link
+              to="/sign-in"
+              className="text-center flex items-center justify-center hover:scale-110 transition-transform"
+            >
+              <span className="text-sm font-medium">Sign In</span>
+            </Link>
+
+            {/* Divider */}
+            <span className="text-white">/</span>
+
+            {/* Sign Up Link */}
+            <Link
+              to="/sign-up"
+              className="text-center flex items-center justify-center hover:scale-110 transition-transform"
+            >
+              <span className="text-sm font-medium">Sign Up</span>
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Mobile Navigation Menu */}
@@ -156,11 +151,10 @@ const Navbar = () => {
                   key={index}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`py-2 text-gray-600 hover:border-b-4 hover:border-gray-500  text-center ${
-                    location.pathname === item
-                      ? "font-semibold border-b-4 border-green-700 text-green-700"
-                      : ""
-                  }`}
+                  className={`py-2 text-gray-600 hover:border-b-4 hover:border-gray-500  text-center ${location.pathname === item
+                    ? "font-semibold border-b-4 border-green-700 text-green-700"
+                    : ""
+                    }`}
                 >
                   <Link to={item} key={index} onClick={() => setIsOpen(false)}>
                     {labels[index]}
