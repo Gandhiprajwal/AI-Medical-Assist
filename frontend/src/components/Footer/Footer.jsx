@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="px-18 h-auto bg-white flex flex-col justify-center items-center gap-4 relative py-6 pb-4">
+    <footer className="dark:bg-black border-t border-[#16493C] px-18 h-auto bg-white flex flex-col justify-center items-center gap-4 relative py-6 pb-4">
       {/* Logo and Navigation Links Section */}
       <div className="flex flex-col w-full">
         {/* Logo and Brand Name */}
@@ -55,15 +55,15 @@ const Footer = () => {
             <input
               type="text"
               placeholder="Enter your email"
-              className="border-2 px-4 py-2 rounded-md border-[#0c86678a] focus:outline-none focus:ring-1 focus:ring-[#0c86678a] focus:border-[#0c86678a] text-black"
+              className="border px-4 py-2 rounded-md border-[#0c86678a] dark:border-white focus:outline-none focus:ring-1 focus:ring-[#0c86678a] focus:border-[#0c86678a] dark:text-white text-black"
             />
             <textarea
               cols="25"
               rows="5"
-              className="border-2 rounded-md border-[#0c86678a] px-4 py-2 focus:outline-none focus:ring-1 focus:ring-[#0c86678a] focus:border-[#0c86678a] text-black"
+              className="border rounded-md border-[#0c86678a] dark:border-white px-4 py-2 focus:outline-none focus:ring-1 focus:ring-[#0c86678a] focus:border-[#0c86678a] text-black dark:text-white"
               placeholder="Have any suggestions? Tell us more!"
             ></textarea>
-            <button className="cursor-pointer border-1 border-black w-1/2 mx-auto bg-[#64b7d3] text-white px-4 py-3 rounded-md hover:opacity-85 transition-all duration-300">
+            <button className="cursor-pointer border-1 border-black dark:border-white w-1/2 mx-auto dark:bg-[#286D7C] bg-[#64b7d3] text-white px-4 py-3 rounded-md hover:opacity-85 transition-all duration-300">
               Submit
             </button>
           </div>

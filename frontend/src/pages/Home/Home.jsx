@@ -32,7 +32,7 @@ const Home = () => {
     {
       img: "./free-trial.png",
       title: "Try for Free Today!",
-      textColor: "rgba(0, 0, 0, 0.51)",
+      textColor: "rgb(141, 138, 138)",
     },
   ];
   const services = [
@@ -68,14 +68,14 @@ const Home = () => {
   return (
     <>
       <div className="w-full">
-        <div className="h-full px-5 md:px-20 py-10 flex" style={{
+        <div className="h-full px-5 dark:bg-[#000000] md:px-20 py-10 flex" style={{
           backgroundImage: `url(${Mainbgimg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}>
           <div
-            className="md:h-2/3 w-full rounded-lg px-4 flex pb-8 pt-10 bg-[#0ED9D0]/30"
+            className="md:h-2/3 w-full rounded-lg px-4 flex pb-8 pt-10 bg-[#0ED9D0]/30 dark:bg-[#000000]/65"
             style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.57)", }}
           >
             <div className="flex flex-col md:px-20 md:py-10">
@@ -107,10 +107,10 @@ const Home = () => {
 
               {/* Buttons Section */}
               <div className="flex gap-6 justify-center md:justify-start">
-                <Link className="px-2 py-4 text-md bg-[#2E93B1] hover:opacity-60 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
+                <Link className="px-2 py-4 text-md bg-[#2E93B1] dark:bg-[#2E93B1]/80 hover:opacity-60 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
                   Get AI Health Prediction
                 </Link>
-                <Link className="px-2 py-4 text-md hover:opacity-60 bg-[#0C8667] text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
+                <Link className="px-2 py-4 text-md hover:opacity-60 bg-[#0C8667] dark:bg-[#0C8667]/70 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
                   Book a Doctor Appointment
                 </Link>
               </div>
@@ -123,9 +123,7 @@ const Home = () => {
           </div>
         </div>
         <div
-          className="w-full px-2 py-6 flex flex-wrap justify-center justify-between gap-4 md:items-center md:justify-evenly md:flex-row z-index-5"
-          style={{ backgroundColor: "rgba(255, 255, 255, 0.80)" }}
-        >
+          className="w-full px-2 py-6 flex flex-wrap justify-center dark:bg-[#000000] bg-[#ffffff]/80 justify-between gap-4 md:items-center md:justify-evenly md:flex-row z-index-5">
           {usp.map((item, key) => (
             <USP
               img={item.img}
@@ -137,9 +135,7 @@ const Home = () => {
         </div>
         <GradientBackground>
           <div
-            className="py-4 gap-2 px-14 flex flex-col md:flex md:flex-row md:justify-between md:items-center"
-            style={{ backgroundColor: "rgba(14, 217, 208, 0.30)" }}
-          >
+            className="py-4 gap-2 px-14 flex flex-col md:flex md:flex-row md:justify-between md:items-center dark:bg-[#16493C] bg-[#0ED9D0]/30">
             <div className="w-fit md:w-1/4">
               <h2 className="p-2 text-xl md:p-2 text-white text-md text-center md:text-lg font-medium">
                 AI Disease Analyzer:
@@ -157,10 +153,8 @@ const Home = () => {
             </div>
           </div>
           <div
-            className="border-4"
-            style={{ borderColor: "rgba(14, 217, 208, 0.80)" }}
-          ></div>
-          <div className="flex flex-wrap flex-col justify-between items-center px-6 py-16 md:px-20 md:w-full">
+            className="border-4 border-[#0ED9D0]/30 border"></div>
+          <div className="dark:bg-gradient-to-b dark:from-[#0C8667] dark:via-[#000000] dark:to-[#286d7c] flex flex-wrap flex-col justify-between items-center px-6 py-16 md:px-20 md:w-full">
             {/* {services.map((item, key) => (
               <Services
                 title={item.title}

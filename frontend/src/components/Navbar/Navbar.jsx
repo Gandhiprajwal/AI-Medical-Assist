@@ -53,7 +53,7 @@ const Navbar = () => {
       {/* Center Section (Navigation Links) */}
       <div className="hidden md:flex justify-center w-full">
         <motion.div
-          className="w-full dark:bg-[#1c2029] flex flex-row justify-center lg:gap-12 gap-8 bg-gray-100 p-2 rounded-lg"
+          className="w-full dark:bg-[#45494a]/30 flex flex-row justify-center lg:gap-12 gap-8 bg-gray-100 p-2 rounded-lg"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

@@ -32,15 +32,14 @@ export const PredictHealth = () => {
     setIsLoading(true);
     setErrorMessage("");
 
-    // Validate input: ensure all symptoms are formatted correctly (e.g., no extra spaces, proper underscores)
     const formattedSymptoms = symptoms
-      .split(",") // Split input into an array based on commas
-      .map((symptom) => symptom.trim().replace(/\s+/g, "_")) // Trim spaces and replace spaces with underscores
-      .join(","); // Join back into a comma-separated string
+      .split(",")
+      .map((symptom) => symptom.trim().replace(/\s+/g, "_"))
+      .join(",");
 
     try {
       const response = await axios.post(`${BASE_URL}/symptoms`, {
-        data: formattedSymptoms, // Send properly formatted symptoms to the API
+        data: formattedSymptoms,
       });
       console.log("PredictHealth.jsx - response data", response.data);
       const res = response.data.data;
@@ -67,21 +66,19 @@ export const PredictHealth = () => {
 
   return (
     <section
-      className="h-124 bg-cover bg-center flex flex-col items-center justify-center px-4 py-10"
-      style={{ backgroundImage: `url('/image3.png')` }} // Replace with your image path
+      className="h-124 bg-cover dark:bg-[#000000] bg-center flex flex-col items-center justify-center px-4 py-10"
+      style={{ backgroundImage: `url('/image3.png')` }}
     >
-      {/* Translucent Card Container */}
       <div
-        className="w-[1111px] h-100 bg-[rgba(0,0,0,0.25)] rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center p-8"
+        className="w-[1111px] h-100 dark:bg-[#000000]/70 bg-[rgba(0,0,0,0.25)] rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center p-8"
         style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.57)" }}
       >
         <h2 className="text-white text-3xl font-bold mb-4">AI Health Check</h2>
 
-        {/* Input Field */}
         <div className="w-full flex flex-col items-center space-y-4">
           <input
             type="text"
-            className="p-3 rounded-xl w-[60%] text-black placeholder-white-300 bg-white outline-none"
+            className="p-3 rounded-xl w-[60%] dark:text-white text-black placeholder-white-300 dark:bg-[#000000] bg-white outline-none"
             style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)" }}
             id="symptoms"
             name="symptoms"
@@ -90,32 +87,34 @@ export const PredictHealth = () => {
             onChange={(e) => setSymptoms(e.target.value)}
           />
 
-          {/* Examples Section */}
           <div className="w-full text-center mt-2">
             <p className="text-white text-sm">
               <strong>Examples:</strong> {exampleSymptoms.join(", ")}
             </p>
           </div>
 
-          {/* Predict Button */}
           <button
             type="submit"
             onClick={handlePrediction}
-            className="border bg-[#2E93B1]/80 hover:cursor-pointer duration-300 text-white font-bold py-2 px-8 rounded-lg hover:scale-105 hover:bg-[#0C8667]/70"
+            className="border bg-[#2E93B1]/80 hover:cursor-pointer duration-300 text-white font-bold py-2 px-8 rounded-lg hover:scale-105 hover:opacity-60"
             style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)" }}
             disabled={isLoading}
           >
             {isLoading ? "Predicting..." : "Predict"}
           </button>
 
-          {/* Results Box */}
-          {description && (
+          {(description || errorMessage) && (
             <div
-              className="w-[1054px] h-28 bg-[#0ED9D0]/30 rounded-lg border border-white p-4 overflow-y-auto"
+              className="w-[1054px] h-28 bg-[#0ED9D0]/30 dark:bg-[#000000]/30 rounded-lg border border-white p-4 overflow-y-auto"
               style={{ maxHeight: "200px", overflowY: "scroll" }}
             >
-              <h3 className="text-xl font-semibold mb-2 text-center">Results</h3>
+              <h3 className="text-xl font-semibold mb-2 text-slate-300 dark:text-slate-300 text-center">Results:</h3>
               <div className="flex flex-wrap gap-4 justify-center">
+                {errorMessage && (
+                  <p className="text-white text-lg font-semibold">
+                    {errorMessage}
+                  </p>
+                )}
                 {isDiseaseVisible && (
                   <p className="bg-red-100 p-2 rounded-lg">
                     <strong>Disease:</strong> {disease}
@@ -151,13 +150,6 @@ export const PredictHealth = () => {
           )}
         </div>
       </div>
-
-      {/* Error Message (if any) */}
-      {errorMessage && (
-        <p className="text-red-500 text-lg mt-6 font-semibold">
-          {errorMessage}
-        </p>
-      )}
     </section>
   );
 };
