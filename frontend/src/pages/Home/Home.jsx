@@ -107,10 +107,10 @@ const Home = () => {
 
               {/* Buttons Section */}
               <div className="flex gap-6 justify-center md:justify-start">
-                <Link className="px-2 py-4 text-md bg-[#2E93B1] dark:bg-[#2E93B1]/80 hover:opacity-60 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
+                <Link className="px-2 py-4 text-md bg-[#2E93B1] transition dark:bg-[#2E93B1]/80 hover:opacity-60 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
                   Get AI Health Prediction
                 </Link>
-                <Link className="px-2 py-4 text-md hover:opacity-60 bg-[#0C8667] dark:bg-[#0C8667]/70 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
+                <Link className="px-2 py-4 text-md transition hover:opacity-60 bg-[#0C8667] dark:bg-[#0C8667]/70 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
                   Book a Doctor Appointment
                 </Link>
               </div>

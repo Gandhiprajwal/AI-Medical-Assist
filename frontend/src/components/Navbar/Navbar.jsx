@@ -58,13 +58,12 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {["/", "/predict-health", "/find-a-doctor", "/feedback"].map(
+          {["/", "/predict-health", "/find-a-doctor"].map(
             (item, index) => {
               const labels = [
                 "Home",
                 "Predict Health",
                 "Find a Doctor",
-                "Feedback",
               ];
               return (
                 <motion.div
