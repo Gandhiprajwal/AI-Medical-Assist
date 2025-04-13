@@ -75,5 +75,3 @@ data={
 }
 
 print(json.dumps(data))
-
-

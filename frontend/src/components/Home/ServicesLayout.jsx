@@ -55,7 +55,7 @@ const ServiceCard = ({ title, description, url, img, className, direction }) => 
     custom={direction}
   >
     <div
-      className={`h-[20rem] lg:max-w-[30rem] lg:max-h-[18rem] flex gap-2 border-2 border-white rounded-md shadow-2xl ${className}`}
+      className={`dark:bg-gradient-to-b dark:from-[#0C8667] dark:via-[#042E23] dark:to-[#000000] h-[20rem] lg:max-w-[30rem] lg:max-h-[18rem] flex gap-2 border-2 border-white rounded-md shadow-2xl ${className}`}
     >
       <div className="text-white w-[60%] px-4 py-4 flex flex-col justify-center gap-4">
         <h1 className="py-2 flex md:gap-2 items-center text-white text-lg md:text-md font-light">
