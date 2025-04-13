@@ -130,7 +130,7 @@ app.post("/api/v1/liver", (req, res) => {
   runPythonScript(res, pythonScriptPathForLiver, liverModel, formattedData);
 });
 
-// heart api 🟢🟢
+// heart api 
 app.post("/api/v1/heart", (req, res) => {
   const inputData = req.body; // Extract JSON input from request
 
