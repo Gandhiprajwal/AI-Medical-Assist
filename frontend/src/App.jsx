@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import { PredictHealth } from "./pages/PredictHealth/PredictHealth";
@@ -14,36 +14,48 @@ import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
+    <BrowserRouter>
+      <MainApp />
+    </BrowserRouter>
+  );
+}
+
+function MainApp() {
+  const location = useLocation();
+
+  // List of routes where Navbar and Footer should not be displayed
+  const excludedRoutes = ["/sign-up"];
+
+  const isExcludedRoute = excludedRoutes.includes(location.pathname);
+
+  return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/predict-health" element={<PredictHealth />} />
-          <Route path="/find-a-doctor" element={<Findadoctor />} />
-          <Route path="/feedback" element={<>Feedback</>} />
-          <Route path="/sign-in" element={<>Sign In</>} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route
-            path="/heart-disease-analyzer"
-            element={<HeartDiseaseAnalyzer />}
-          />
-          <Route
-            path="/liver-disease-analyzer"
-            element={<LiverDiseaseAnalyzer />}
-          />
-          <Route
-            path="/skin-disease-analyzer"
-            element={<SkinDiseaseAnalyzer />}
-          />
-          <Route
-            path="/dengue-fever-analyzer"
-            element={<DengueFeverAnalyzer />}
-          />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      {!isExcludedRoute && <Navbar />}
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/predict-health" element={<PredictHealth />} />
+        <Route path="/find-a-doctor" element={<Findadoctor />} />
+        <Route path="/sign-in" element={<>Sign In</>} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route
+          path="/heart-disease-analyzer"
+          element={<HeartDiseaseAnalyzer />}
+        />
+        <Route
+          path="/liver-disease-analyzer"
+          element={<LiverDiseaseAnalyzer />}
+        />
+        <Route
+          path="/skin-disease-analyzer"
+          element={<SkinDiseaseAnalyzer />}
+        />
+        <Route
+          path="/dengue-fever-analyzer"
+          element={<DengueFeverAnalyzer />}
+        />
+      </Routes>
+      {!isExcludedRoute && <Footer />}
     </>
   );
 }
