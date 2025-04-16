@@ -7,6 +7,8 @@ import Footer from "./components/Footer/Footer";
 import Findadoctor from "./components/FindADoctor/Findadoctor";
 import HeartDiseaseAnalyzer from "./pages/HeartDiseaseAnalyzer/HeartDiseaseAnalyzer";
 import LiverDiseaseAnalyzer from "./pages/LiverDiseaseAnalyzer/LiverDiseaseAnalyzer";
+import SkinDiseaseAnalyzer from "./pages/SkinDiseaseAnalyzer/SkinDiseaseAnalyzer";
+import DengueFeverAnalyzer from "./pages/DengueFeverAnalyzer/DengueFeverAnalyzer";
 import SignUp from "./pages/SignUp/SignUp";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -30,6 +32,14 @@ function App() {
           <Route
             path="/liver-disease-analyzer"
             element={<LiverDiseaseAnalyzer />}
+          />
+          <Route
+            path="/skin-disease-analyzer"
+            element={<SkinDiseaseAnalyzer />}
+          />
+          <Route
+            path="/dengue-fever-analyzer"
+            element={<DengueFeverAnalyzer />}
           />
         </Routes>
         <Footer />

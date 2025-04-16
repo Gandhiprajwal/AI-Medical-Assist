@@ -27,10 +27,7 @@ const Footer = () => {
             <Link to="/predict-health">
               <li className="py-2 underline-offset-2 underline">Predict Health</li>
             </Link>
-            <Link to="/disease-analyzer">
-              <li className="py-2 underline-offset-2 underline">Disease Analyzer</li>
-            </Link>
-            <Link to="/find-doctor">
+            <Link to="/find-a-doctor">
               <li className="py-2 underline-offset-2 underline">Find a Doctor</li>
             </Link>
           </div>
@@ -39,14 +36,14 @@ const Footer = () => {
             <Link to="/heart-disease-analyzer">
               <li className="py-2 underline-offset-2 underline">Heart: Disease Analyzer</li>
             </Link>
-            <Link to="/kidney-disease-analyzer">
-              <li className="py-2 underline-offset-2 underline">Kidney: Disease Analyzer</li>
+            <Link to="/skin-disease-analyzer">
+              <li className="py-2 underline-offset-2 underline">Skin: Disease Analyzer</li>
             </Link>
             <Link to="/liver-disease-analyzer">
               <li className="py-2 underline-offset-2 underline">Liver: Disease Analyzer</li>
             </Link>
-            <Link to="/malaria-disease-analyzer">
-              <li className="py-2 underline-offset-2 underline">Malaria: Disease Analyzer</li>
+            <Link to="/dengue-fever-analyzer">
+              <li className="py-2 underline-offset-2 underline">Dengue: Fever Analyzer</li>
             </Link>
           </div>
 

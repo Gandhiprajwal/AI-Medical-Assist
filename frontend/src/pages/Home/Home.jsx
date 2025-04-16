@@ -51,18 +51,18 @@ const Home = () => {
       img: "./liver-img.png",
     },
     {
-      title: "Kidney Disease Analyzer",
+      title: "Skin Disease Analyzer",
       description:
-        "Kidney disease often results from diabetes, high blood pressure, infections, or prolonged use of certain medications. It can lead to kidney failure if not detected early. Checking your risk can help in managing the condition better.",
-      url: "/kidney-disease-analyzer",
-      img: "./kidney-img.png",
+        "Skin diseases like monkeypox, chickenpox, and others can cause rashes, blisters, itching, and fever. Early detection is crucial for proper treatment and to prevent spreading. Use AI to analyze symptoms and check your risk for common skin infections.",
+      url: "/skin-disease-analyzer",
+      img: "./skin-disease.png",
     },
     {
-      title: "Malaria Disease Analyzer",
+      title: "Dengue Fever Analyzer",
       description:
-        "Malaria is a mosquito-borne disease caused by Plasmodium parasites. Symptoms include high fever, chills, sweating, and fatigue. If left untreated, it can become life-threatening. Check your symptoms and risk with AI.",
-      url: "/malaria-disease-analyzer",
-      img: "./malaria-img.png",
+        "Dengue fever is a mosquito-borne viral infection caused by the dengue virus. Common symptoms include high fever, severe headache, joint and muscle pain, rash, and fatigue. If not managed properly, it can lead to serious complications. Check your symptoms and risk with AI.",
+      url: "/dengue-fever-analyzer",
+      img: "./dengue-fever.png",
     },
   ];
   return (
@@ -107,10 +107,10 @@ const Home = () => {
 
               {/* Buttons Section */}
               <div className="flex gap-6 justify-center md:justify-start">
-                <Link className="px-2 py-4 text-md bg-[#2E93B1] transition dark:bg-[#2E93B1]/80 hover:opacity-60 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
+                <Link to="/predict-health" className="px-2 py-4 text-md bg-[#2E93B1] transition dark:bg-[#2E93B1]/80 hover:opacity-60 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
                   Get AI Health Prediction
                 </Link>
-                <Link className="px-2 py-4 text-md transition hover:opacity-60 bg-[#0C8667] dark:bg-[#0C8667]/70 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
+                <Link to="/find-a-doctor" className="px-2 py-4 text-md transition hover:opacity-60 bg-[#0C8667] dark:bg-[#0C8667]/70 text-white md:px-8 md:py-4 rounded-md hover:scale-105" style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)", }}>
                   Book a Doctor Appointment
                 </Link>
               </div>
