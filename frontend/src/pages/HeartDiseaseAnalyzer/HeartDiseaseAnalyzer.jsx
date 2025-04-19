@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import bgImage from "../../assets/heartbgimg3.gif"
+import bgImage from "../../assets/heartbgimg3.gif";
 import axios from "axios";
 import { BASE_URL } from "../../config";
 
@@ -19,12 +19,46 @@ const HeartDiseaseAnalyzer = () => {
   // Prediction & Errors
   const [prediction, setPrediction] = useState(null);
   const [formError, setFormError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setInputData({ ...inputData, [name]: value });
     setFormError(""); // Clear error on change
+  };
+
+  // Validation logic for ranges
+  const validateRanges = () => {
+    const newErrors = [];
+
+    if (inputData.age < 18 || inputData.age > 100) {
+      newErrors.push("Age should be between 18 and 100.");
+    }
+    if (!["male", "female"].includes(inputData.gender)) {
+      newErrors.push("Please select a valid gender.");
+    }
+    if (inputData.heartRate < 50 || inputData.heartRate > 120) {
+      newErrors.push("Heart Rate should be between 50 and 120 bpm.");
+    }
+    if (inputData.systolicBP < 90 || inputData.systolicBP > 180) {
+      newErrors.push("Systolic Blood Pressure should be between 90 and 180 mmHg.");
+    }
+    if (inputData.diastolicBP < 60 || inputData.diastolicBP > 120) {
+      newErrors.push("Diastolic Blood Pressure should be between 60 and 120 mmHg.");
+    }
+    if (inputData.bloodSugar < 70 || inputData.bloodSugar > 200) {
+      newErrors.push("Blood Sugar should be between 70 and 200 mg/dL.");
+    }
+    if (inputData.ckmb < 0 || inputData.ckmb > 10) {
+      newErrors.push("CK-MB should be between 0 and 10 ng/mL.");
+    }
+    if (inputData.troponin < 0 || inputData.troponin > 2) {
+      newErrors.push("Troponin should be between 0 and 2 ng/mL.");
+    }
+
+    setFormError(newErrors.join(" "));
+    return newErrors.length === 0;
   };
 
   // Handle form submission
@@ -36,11 +70,18 @@ const HeartDiseaseAnalyzer = () => {
       return;
     }
 
+    if (!validateRanges()) {
+      return;
+    }
+
     try {
+      setIsSubmitting(true); // Show "Predicting..." on the button
       const response = await axios.post(`${BASE_URL}/heart`, inputData);
       setPrediction(response.data.prediction);
     } catch (error) {
       console.error("Error during prediction:", error);
+    } finally {
+      setIsSubmitting(false); // Reset button text
     }
   };
 
@@ -61,7 +102,9 @@ const HeartDiseaseAnalyzer = () => {
               <h2 className="text-lg font-semibold mb-3">Basic Information</h2>
               <div className="flex flex-col w-full gap-3">
                 <div>
-                  <label className="block text-sm">Age:</label>
+                  <label className="block text-sm">
+                    Age (18 - 100 years):
+                  </label>
                   <input
                     type="number"
                     name="age"
@@ -92,7 +135,9 @@ const HeartDiseaseAnalyzer = () => {
               <h2 className="text-lg font-semibold mb-3">Health Parameters</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm">Heart Rate:</label>
+                  <label className="block text-sm">
+                    Heart Rate (50 - 120 bpm):
+                  </label>
                   <input
                     type="number"
                     name="heartRate"
@@ -103,7 +148,9 @@ const HeartDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm">Systolic Blood Pressure:</label>
+                  <label className="block text-sm">
+                    Systolic Blood Pressure (90 - 180 mmHg):
+                  </label>
                   <input
                     type="number"
                     name="systolicBP"
@@ -114,7 +161,9 @@ const HeartDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm">Diastolic Blood Pressure:</label>
+                  <label className="block text-sm">
+                    Diastolic Blood Pressure (60 - 120 mmHg):
+                  </label>
                   <input
                     type="number"
                     name="diastolicBP"
@@ -125,7 +174,9 @@ const HeartDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm">Blood Sugar:</label>
+                  <label className="block text-sm">
+                    Blood Sugar (70 - 200 mg/dL):
+                  </label>
                   <input
                     type="number"
                     name="bloodSugar"
@@ -136,7 +187,9 @@ const HeartDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm">CK-MB:</label>
+                  <label className="block text-sm">
+                    CK-MB (0 - 10 ng/mL):
+                  </label>
                   <input
                     type="number"
                     name="ckmb"
@@ -147,7 +200,9 @@ const HeartDiseaseAnalyzer = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm">Troponin:</label>
+                  <label className="block text-sm">
+                    Troponin (0 - 2 ng/mL):
+                  </label>
                   <input
                     type="number"
                     name="troponin"
@@ -170,7 +225,7 @@ const HeartDiseaseAnalyzer = () => {
               type="submit"
               className="bg-yellow-900 border-2 border-white cursor-pointer border-black hover:bg-green-900 text-white font-bold py-2 px-6 rounded"
             >
-              Predict
+              {isSubmitting ? "Predicting..." : "Predict"}
             </button>
           </div>
         </form>
@@ -179,12 +234,13 @@ const HeartDiseaseAnalyzer = () => {
         {prediction !== null && (
           <div
             className={`mt-6 p-4 rounded text-center ${
-              prediction == "positive" ? "bg-red-400" : "bg-green-400"
+              prediction === "positive" ? "bg-red-400" : "bg-green-400"
             }`}
           >
             <h3 className="text-lg font-bold">
-              {prediction == "positive"
+              {prediction === "positive"
                 ? "High Risk! Please consult a doctor immediately."
+
                 : "Low Risk! You're in good health."}
             </h3>
           </div>
