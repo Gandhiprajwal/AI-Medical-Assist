@@ -9,7 +9,8 @@ import HeartDiseaseAnalyzer from "./pages/HeartDiseaseAnalyzer/HeartDiseaseAnaly
 import LiverDiseaseAnalyzer from "./pages/LiverDiseaseAnalyzer/LiverDiseaseAnalyzer";
 import SkinDiseaseAnalyzer from "./pages/SkinDiseaseAnalyzer/SkinDiseaseAnalyzer";
 import DengueFeverAnalyzer from "./pages/DengueFeverAnalyzer/DengueFeverAnalyzer";
-import SignUp from "./pages/SignUp/SignUp";
+import SignUp from "./pages/SignupSignin/SignUp";
+import SignIn from "./pages/SignupSignin/SingIn";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
@@ -24,7 +25,7 @@ function MainApp() {
   const location = useLocation();
 
   // List of routes where Navbar and Footer should not be displayed
-  const excludedRoutes = ["/sign-up"];
+  const excludedRoutes = ["/sign-up", "/sign-in"];
 
   const isExcludedRoute = excludedRoutes.includes(location.pathname);
 
@@ -36,7 +37,7 @@ function MainApp() {
         <Route path="/" element={<Home />} />
         <Route path="/predict-health" element={<PredictHealth />} />
         <Route path="/find-a-doctor" element={<Findadoctor />} />
-        <Route path="/sign-in" element={<>Sign In</>} />
+        <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route
           path="/heart-disease-analyzer"
