@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -37,6 +38,14 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
   })
 );
+
+// Mongoose Connection
+mongoose = require("./db/dbConfig");
+
+
+// Routes
+const authRoutes = require("./Routes/auth");
+app.use("/api/v2/auth", authRoutes);
 
 // Function to handle AI model predictions
 const runPythonScript = (res, scriptPath, modelPath, inputData) => {
