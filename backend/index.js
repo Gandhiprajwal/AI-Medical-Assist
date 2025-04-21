@@ -6,7 +6,14 @@ const { spawn } = require("child_process");
 const cors = require("cors");
 const healthPredictRouter = require("./Routes/healthPredict.js");
 const PORT = 3000;
+// const cors = require("cors");
+const socketIo = require("socket.io");
+const http = require("http");
 // app.use(express.json());
+
+// Socket.io setup
+const server = http.createServer(app);
+const io = socketIo(server, { cors: { origin: "*" } });
 
 // Ensure correct paths to AI models
 const heartModel = "D:\\AI-MedLab\\backend\\aimodels\\heart.pkl";
@@ -18,6 +25,7 @@ const pythonScriptPathForHeart = path.resolve(__dirname, "heart.py");
 // Try using a virtual environment, else fallback to system Python
 let PYTHON_PATH = "D:\\AI-MedLab\\venv\\Scripts\\python.exe"; // Virtual environment
 const GLOBAL_PYTHON_PATH = "python"; // Use system Python as a fallback
+// exports.module = { pythonScriptPathForLiver, liverModel,PYTHON_PATH };
 
 // Check if Python executable exists
 const fs = require("fs");
@@ -38,16 +46,36 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
   })
 );
+app.set("io", io);
 
 // Mongoose Connection
 mongoose = require("./db/dbConfig");
 
-
 // Routes
 const authRoutes = require("./Routes/auth");
+// const aiRoutes = require("./Routes/aiModesRoute");
+// app.use("/api/v1",aiRoutes);
 app.use("/api/v2/auth", authRoutes);
+// Routes
+app.use("/api/v3/appointments", require("./Routes/appointmentRoutes"));
+app.use("/api/v4/doctors", require("./Routes/doctorRoute")); // doctor routes for availability
 
-// Function to handle AI model predictions
+// Socket connection
+io.on("connection", (socket) => {
+  console.log("Socket connected:", socket.id);
+
+  socket.on("join", (userId) => {
+    socket.join(userId);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Socket disconnected:", socket.id);
+  });
+});
+
+require("./cron/reminderCron");
+
+// Function to handle AI model predictions -- Liver
 const runPythonScript = (res, scriptPath, modelPath, inputData) => {
   try {
     if (!inputData) {
@@ -109,15 +137,6 @@ const runPythonScript = (res, scriptPath, modelPath, inputData) => {
   }
 };
 
-// Route for Heart Prediction
-// app.post("/api/v1/heart", (req, res) => {
-//   console.log("Received heart request with data:", req.body);
-//   runPythonScript(res, pythonScriptPathForHeart, heartModel, req.body.data);
-// });
-
-// not working ❌❌
-// app.use("/api/v1", healthPredictRouter);
-
 // Route for Liver Prediction 🟢🟢
 app.post("/api/v1/liver", (req, res) => {
   // console.log("Received liver request with data:", req.body);
@@ -139,7 +158,7 @@ app.post("/api/v1/liver", (req, res) => {
   runPythonScript(res, pythonScriptPathForLiver, liverModel, formattedData);
 });
 
-// heart api 
+// heart api
 app.post("/api/v1/heart", (req, res) => {
   const inputData = req.body; // Extract JSON input from request
 

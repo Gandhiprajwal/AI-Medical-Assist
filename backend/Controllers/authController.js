@@ -8,12 +8,9 @@ const createToken = (userId, role) => {
 // Signup controller
 exports.signup = async (req, res) => {
     try {
-        const {
-            fullName, emailorphone, password,
-            isDoctor, specialization, experience, qualification, consultationFees, availability
-        } = req.body;
+        const { fullname, emailorphone, password, isDoctor } = req.body;
 
-        if (!fullName || !emailorphone || !password) {
+        if (!fullname || !emailorphone || !password) {
             return res.status(400).json({ message: "All fields are required." });
         }
 
@@ -21,28 +18,26 @@ exports.signup = async (req, res) => {
         if (existingUser) return res.status(409).json({ message: "User already exists." });
 
         const newUser = new User({
-            fullName,
+            fullname,
             emailorphone,
             password,
             isDoctor: isDoctor || false,
             isPatient: !isDoctor,
             role: isDoctor ? "doctor" : "user",
-            specialization,
-            experience,
-            qualification,
-            consultationFees,
-            availability
+            profileCompleted: !isDoctor // new field to track if doctor profile is complete
         });
 
         await newUser.save();
 
-        const token = createToken(newUser._id, newUser.role);
+        const token = newUser.generateJWT();
         res.status(201).json({
             token,
             user: {
                 id: newUser._id,
-                fullName: newUser.fullName,
-                role: newUser.role
+                fullname: newUser.fullname,
+                role: newUser.role,
+                isDoctor: newUser.isDoctor,
+                profileCompleted: newUser.profileCompleted
             }
         });
     } catch (err) {
@@ -61,16 +56,24 @@ exports.signin = async (req, res) => {
             return res.status(401).json({ message: "Invalid credentials." });
         }
 
-        const token = createToken(user._id, user.role);
+        const token = createToken(user._id, user.role); // or createToken(user._id, user.role)
         res.status(200).json({
             token,
             user: {
                 id: user._id,
-                fullName: user.fullName,
+                fullname: user.fullname,
                 role: user.role,
-                isDoctor: user.isDoctor
+                isDoctor: user.isDoctor,
+                profileCompleted: user.profileCompleted,
+                ...(user.isDoctor && user.profileCompleted && {
+                    specialization: user.specialization,
+                    experience: user.experience,
+                    qualification: user.qualification,
+                    consultationFees: user.consultationFees,
+                    availability: user.availability
+                })
             }
-        });
+        });        
     } catch (err) {
         console.error("Signin Error:", err);
         res.status(500).json({ message: "Internal server error" });
@@ -105,6 +108,54 @@ exports.getUser = async (req, res) => {
         res.status(200).json(user);
     } catch (err) {
         console.error("Get User Error:", err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+// Update doctor profile
+exports.completeDoctorProfile = async (req, res) => {
+    try {
+        const userId = req.user.id; // assumes you have auth middleware
+        const {
+            specialization,
+            experience,
+            qualification,
+            consultationFees,
+            availability,
+            about,
+            hospitalName,
+            contactNumber,
+            keyPoints
+        } = req.body;
+
+        if (!specialization || !experience || !qualification || !consultationFees || !availability) {
+            return res.status(400).json({ message: "All fields are required to complete profile." });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(userId, {
+            specialization,
+            experience,
+            qualification,
+            consultationFees,
+            availability,
+            about,
+            hospitalName,
+            contactNumber,
+            keyPoints,
+            profileCompleted: true
+        }, { new: true });
+
+        res.status(200).json({
+            message: "Doctor profile completed successfully.",
+            user: {
+                id: updatedUser._id,
+                fullname: updatedUser.fullname,
+                role: updatedUser.role,
+                profileCompleted: updatedUser.profileCompleted
+            }
+        });
+    } catch (err) {
+        console.error("Profile Completion Error:", err);
         res.status(500).json({ message: "Internal server error" });
     }
 };

@@ -7,5 +7,6 @@ router.post("/signup", authController.signup);             // User & doctor sign
 router.post("/signin", authController.signin);             // Shared login
 router.post("/forgot-password", authController.handleForgetPassword);
 router.get("/user", authMiddleware, authController.getUser); // Protected route
+router.post("/complete-doctor-profile", authMiddleware, authController.completeDoctorProfile); // Complete doctor profile
 
 module.exports = router;
