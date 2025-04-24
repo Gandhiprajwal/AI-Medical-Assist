@@ -237,7 +237,7 @@ const Findadoctor = () => {
               </Modal>
             </div>
 
-            <h2 className="text-xl font-bold">Dr. {selectedDoctor.fullName}</h2>
+            <h2 className="text-xl dark:text-white font-bold">Dr. {selectedDoctor.fullName}</h2>
             <div className="flex gap-4 items-center pt-2 text-sm">
               <p className="text-gray-500 dark:text-gray-400">{selectedDoctor.specialistType}</p>
               <div className="flex items-center ">
