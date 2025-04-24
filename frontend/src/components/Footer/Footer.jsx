@@ -7,7 +7,7 @@ const Footer = () => {
       {/* Top Section */}
       <div className="w-full flex flex-col gap-8">
         {/* Logo */}
-        <div className="flex md:justify-start items-center gap-3">
+        <div className="flex lg:justify-start justify-center items-center gap-3">
           <img src="./logo.png" alt="logo" className="h-10 md:h-12" />
           <p className="text-sm md:text-md font-semibold">
             <span className="text-[#2E93B1]">AI</span>{" "}
@@ -17,16 +17,16 @@ const Footer = () => {
         </div>
 
         {/* Grid Layout for Content */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 text-sm md:text-md text-[#2E93B1]">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6 text-sm md:text-md text-[#2E93B1]">
           {/* Column 1 */}
-          <div className="flex flex-col gap-3 md:border-r md:pr-6">
+          <div className="flex flex-col gap-3 justify-center lg:items-start items-center lg:border-r lg:pr-6">
             <Link to="/" className="underline underline-offset-2">Home</Link>
             <Link to="/predict-health" className="underline underline-offset-2">Predict Health</Link>
             <Link to="/find-a-doctor" className="underline underline-offset-2">Find a Doctor</Link>
           </div>
 
           {/* Column 2 */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col justify-center items-center gap-3">
             <Link to="/heart-disease-analyzer" className="underline underline-offset-2">Heart: Disease Analyzer</Link>
             <Link to="/skin-disease-analyzer" className="underline underline-offset-2">Skin: Disease Analyzer</Link>
             <Link to="/liver-disease-analyzer" className="underline underline-offset-2">Liver: Disease Analyzer</Link>
@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
 
           {/* Column 3 - Suggestions */}
-          <div className="flex flex-col gap-3 border-t border-t-0 md:border-l md:pl-6">
+          <div className="flex flex-col gap-3 border-t border-t-0 lg:border-l lg:pl-6">
             <input
               type="text"
               placeholder="Enter your email"

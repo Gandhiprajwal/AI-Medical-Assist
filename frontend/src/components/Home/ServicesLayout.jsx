@@ -98,7 +98,7 @@ const ServicesLayout = ({ services }) => {
         <img
           src="./hospital-symbol.png"
           alt="Hospital Symbol"
-          className="w-[400px] h-[400px] opacity-50"
+          className="w-[400px] h-[400px] opacity-50 hidden lg:block"
         />
       </motion.div>
 
@@ -112,7 +112,7 @@ const ServicesLayout = ({ services }) => {
       >
         <Link
           to="/more-analyzers"
-          className="bg-white dark:bg-black dark:text-white cursor-pointer text-black py-2 px-4 rounded-md font-semibold shadow-lg hover:bg-gray-200"
+          className="bg-white dark:bg-slate-800 dark:text-white hover:cursor-pointer text-black py-2 px-4 rounded-md font-semibold shadow-lg"
         >
           More AI Disease Analyzer
         </Link>

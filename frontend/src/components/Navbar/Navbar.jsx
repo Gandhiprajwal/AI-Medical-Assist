@@ -136,7 +136,7 @@ const Navbar = () => {
       <AnimatePresence></AnimatePresence>
       {isOpen && (
         <motion.div
-          className="absolute h-screen top-20 left-0 w-full bg-white dark:bg-black shadow-lg flex flex-col items-center justify-center md:hidden gap-6"
+          className="absolute z-5 h-screen top-20 left-0 w-full bg-white dark:bg-black shadow-lg flex flex-col pt-18 items-center justify-center md:hidden gap-6"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
