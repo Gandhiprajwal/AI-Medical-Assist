@@ -114,7 +114,7 @@ const Home = () => {
                   Book a Doctor Appointment
                 </Link>
               </div>
-            <img src={DoctorImageHomePage} className="absolute bottom-1 right-0" alt="doctor-image" style={{
+            <img src={DoctorImageHomePage} className="hidden md:block absolute bottom-1 right-0" alt="doctor-image" style={{
               objectFit: "cover",
               width: "35%",
               height: "70%",
