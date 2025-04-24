@@ -29,8 +29,8 @@ if missing_keys:
 
 # Step 4: Load the model and scaler
 try:
-    model = joblib.load('./aimodels/dengue.pkl')
-    preprocessor = joblib.load('./aimodels/dengue_preprocessor.pkl')
+    model = joblib.load('./aimodels/dengue_classifier.pkl')
+    preprocessor = joblib.load('./aimodels/dengue_pipeline (1).pkl')
 except Exception as e:
     print(json.dumps({"error": f"Model loading failed: {str(e)}"}))
     sys.exit(1)
@@ -40,14 +40,10 @@ try:
     # Convert input dictionary to DataFrame
     input_df = pd.DataFrame([data_dict])  
 
-    # Separate categorical and continuous features
-    # categorical_cols = ['Sex', 'Differential Count', 'RBC PANEL', 'Age_Group']
-    # continuous_cols = ['Haemoglobin', 'PDW']
-
-    # Scale only continuous features
-    input_df=preprocessor.transform(input_df)
+    preprocessor = preprocessor[:-1]  # exclude final model
+    input_df_transformed = preprocessor.transform(input_df)
     # Make prediction
-    prediction = model.predict(input_df)
+    prediction = model.predict(input_df_transformed)
 
     # Convert prediction to label
     def convert_int_category(pred):
