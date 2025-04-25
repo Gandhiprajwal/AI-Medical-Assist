@@ -112,7 +112,7 @@ const ServicesLayout = ({ services }) => {
       >
         <Link
           to="/more-analyzers"
-          className="bg-white dark:bg-slate-800 dark:text-white hover:cursor-pointer text-black py-2 px-4 rounded-md font-semibold shadow-lg"
+          className="bg-white dark:bg-green-900 dark:text-white hover:cursor-pointer text-black py-2 px-4 rounded-md font-semibold shadow-lg"
         >
           More AI Disease Analyzer
         </Link>

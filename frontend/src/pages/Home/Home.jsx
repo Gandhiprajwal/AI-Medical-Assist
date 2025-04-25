@@ -91,9 +91,8 @@ const Home = () => {
               </div>
 
               {/* Mobile Image */}
-              <div className="pb-4z-2 lg:hidden flex items-center opacity-70 mt-8 justify-center" >
-              <img src={DoctorImageHomePage2} className="lg:hidden z-1 " style={{
-            }} />
+              <div className="pb-4 z-2 lg:hidden flex items-center opacity-70 mt-8 justify-center" >
+              <img src={DoctorImageHomePage2} className="lg:hidden"/>
               </div>
 
               {/* Description Section */}

@@ -136,13 +136,13 @@ const Navbar = () => {
       <AnimatePresence></AnimatePresence>
       {isOpen && (
         <motion.div
-          className="absolute z-5 h-screen top-20 left-0 w-full bg-white dark:bg-black shadow-lg flex flex-col pt-18 items-center justify-center md:hidden gap-6"
+          className="absolute z-50 h-fit pb-6 top-20 right-0 w-full bg-white dark:bg-black shadow-lg flex flex-col items-start pl-6 md:hidden gap-4"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
         >
-          {["/", "/predict-health", "/find-a-doctor", "/feedback"].map(
+          {["/", "/predict-health", "/find-a-doctor"].map(
             (item, index) => {
               const labels = [
                 "Home",
