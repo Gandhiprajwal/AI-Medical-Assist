@@ -18,9 +18,13 @@ const io = socketIo(server, { cors: { origin: "*" } });
 // Ensure correct paths to AI models
 const heartModel = "D:\\AI-MedLab\\backend\\aimodels\\heart.pkl";
 const liverModel = "D:\\AI-MedLab\\backend\\aimodels\\liver.pkl";
+const dengueModel = "D:\\AI-MedLab\\backend\\aimodels\\dengue.pkl";
+const skinModel = "D:\\AI-MedLab\\backend\\aimodels\\skin.pkl";
 
 const pythonScriptPathForLiver = path.resolve(__dirname, "liver.py");
 const pythonScriptPathForHeart = path.resolve(__dirname, "heart.py");
+const pythonScriptPathForDengue = path.resolve(__dirname, "dengue.py");
+const pythonScriptPathForSkin = path.resolve(__dirname, "skin.py");
 
 // Try using a virtual environment, else fallback to system Python
 let PYTHON_PATH = "D:\\AI-MedLab\\venv\\Scripts\\python.exe"; // Virtual environment
@@ -208,6 +212,49 @@ app.post("/api/v1/heart", (req, res) => {
     }
   });
 });
+
+// Route for Dengue Prediction
+app.post("/api/v1/dengue", (req, res) => {
+  const inputData = req.body; // Extract JSON input from request
+  if (!inputData) {
+    return res.status(400).json({ error: "No input data provided" });
+  }
+  // Convert frontend data to required format
+  
+  console.log("Received dengue request with data:", req.body);
+  runPythonScript(res, pythonScriptPathForDengue, dengueModel, req.body);
+});
+app.post('/predict', (req, res) => {
+  const inputData = req.body;
+
+  // Spawn Python process
+  const python = spawn('python3', ['dengue.py', JSON.stringify(inputData)]);
+
+  let output = '';
+  let errorOutput = '';
+
+  python.stdout.on('data', (data) => {
+      output += data.toString();
+  });
+
+  python.stderr.on('data', (data) => {
+      errorOutput += data.toString();
+  });
+
+  python.on('close', (code) => {
+      try {
+          const jsonOutput = JSON.parse(output.trim());
+          res.json(jsonOutput);
+      } catch (err) {
+          res.status(500).json({
+              error: 'Failed to parse Python script output',
+              details: errorOutput || output
+          });
+      }
+  });
+});
+
+// Route for Skin Disease Prediction
 
 // Root Route
 app.get("/", (req, res) => {

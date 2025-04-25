@@ -40,14 +40,10 @@ try:
     # Convert input dictionary to DataFrame
     input_df = pd.DataFrame([data_dict])  
 
-    # Separate categorical and continuous features
-    # categorical_cols = ['Sex', 'Differential Count', 'RBC PANEL', 'Age_Group']
-    # continuous_cols = ['Haemoglobin', 'PDW']
-
-    # Scale only continuous features
-    input_df=preprocessor.transform(input_df)
+    preprocessor = preprocessor[:-1]  # exclude final model
+    input_df_transformed = preprocessor.transform(input_df)
     # Make prediction
-    prediction = model.predict(input_df)
+    prediction = model.predict(input_df_transformed)
 
     # Convert prediction to label
     def convert_int_category(pred):
