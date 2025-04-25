@@ -66,19 +66,19 @@ export const PredictHealth = () => {
 
   return (
     <section
-      className="h-124 bg-cover dark:bg-[#000000] bg-center flex flex-col items-center justify-center px-4 py-10"
+      className="lg:h-124 md:h-1/2 w-full bg-cover dark:bg-[#000000] bg-center flex flex-col items-center justify-center md:px-16 px-8 py-10"
       style={{ backgroundImage: `url('/image3.png')` }}
     >
       <div
-        className="w-[1111px] h-100 dark:bg-[#000000]/70 bg-[rgba(0,0,0,0.25)] rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center p-8"
+        className="w-full lg:h-100 md:h-1/2 dark:bg-[#000000]/70 bg-[rgba(0,0,0,0.25)] rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center p-8"
         style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.57)" }}
       >
-        <h2 className="text-white text-3xl font-bold mb-4">AI Health Check</h2>
+        <h2 className="text-white md:text-3xl text-xl font-bold mb-4">AI Health Check</h2>
 
         <div className="w-full flex flex-col items-center space-y-4">
           <input
             type="text"
-            className="p-3 rounded-xl w-[60%] dark:text-white text-black placeholder-white-300 dark:bg-[#000000] bg-white outline-none"
+            className="p-3 rounded-xl text-center md:w-[60%] w-full dark:text-white text-black placeholder-white-300 dark:bg-[#000000] bg-white outline-none"
             style={{ boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.32)" }}
             id="symptoms"
             name="symptoms"
@@ -87,8 +87,8 @@ export const PredictHealth = () => {
             onChange={(e) => setSymptoms(e.target.value)}
           />
 
-          <div className="w-full text-center mt-2">
-            <p className="text-white text-sm">
+          <div className="w-full lg:text-center text-justify mt-2">
+            <p className="text-blue-200 text-sm">
               <strong>Examples:</strong> {exampleSymptoms.join(", ")}
             </p>
           </div>
@@ -105,13 +105,13 @@ export const PredictHealth = () => {
 
           {(description || errorMessage) && (
             <div
-              className="w-[1054px] h-28 bg-[#0ED9D0]/30 dark:bg-[#000000]/30 rounded-lg border border-white p-4 overflow-y-auto"
+              className="w-full h-28 bg-[#0ED9D0]/30 dark:bg-[#000000]/30 rounded-lg border border-white p-4 overflow-y-auto"
               style={{ maxHeight: "200px", overflowY: "scroll" }}
             >
-              <h3 className="text-xl font-semibold mb-2 text-slate-300 dark:text-slate-300 text-center">Results:</h3>
+              <h3 className="md:text-xl text-lg font-semibold mb-2 text-slate-300 dark:text-slate-300 text-center">Results:</h3>
               <div className="flex flex-wrap gap-4 justify-center">
                 {errorMessage && (
-                  <p className="text-white text-lg font-semibold">
+                  <p className="text-center text-red-400 md:text-lg text-sm font-semibold">
                     {errorMessage}
                   </p>
                 )}

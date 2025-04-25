@@ -29,8 +29,8 @@ if missing_keys:
 
 # Step 4: Load the model and scaler
 try:
-    model = joblib.load('./aimodels/dengue.pkl')
-    preprocessor = joblib.load('./aimodels/dengue_preprocessor.pkl')
+    model = joblib.load('./aimodels/dengue_classifier.pkl')
+    preprocessor = joblib.load('./aimodels/dengue_pipeline (1).pkl')
 except Exception as e:
     print(json.dumps({"error": f"Model loading failed: {str(e)}"}))
     sys.exit(1)

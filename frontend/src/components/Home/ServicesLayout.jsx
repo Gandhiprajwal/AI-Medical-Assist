@@ -17,7 +17,6 @@ const GradientBackground = styled(motion.div)`
   transition: background 0.3s ease-in-out;
   border-radius: 10px;
   z-index: 10;
-//   overflow: hidden;  
   &:hover {
     background: linear-gradient(
       270deg,
@@ -99,19 +98,24 @@ const ServicesLayout = ({ services }) => {
         <img
           src="./hospital-symbol.png"
           alt="Hospital Symbol"
-          className="w-[400px] h-[400px] opacity-50"
+          className="w-[400px] h-[400px] opacity-50 hidden lg:block"
         />
       </motion.div>
+
+      {/* Clickable Button */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        className="absolute inset-0 flex items-center justify-center"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 2 }}
       >
-        <h2 className="text-white text-xl font-medium opacity-80">
+        <Link
+          to="/more-analyzers"
+          className="bg-white dark:bg-green-900 dark:text-white hover:cursor-pointer text-black py-2 px-4 rounded-md font-semibold shadow-lg"
+        >
           More AI Disease Analyzer
-        </h2>
+        </Link>
       </motion.div>
 
       {/* Services Cards Layout */}
