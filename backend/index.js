@@ -9,6 +9,8 @@ const PORT = 3000;
 // const cors = require("cors");
 const socketIo = require("socket.io");
 const http = require("http");
+const multer = require("multer");
+const { PythonShell } = require('python-shell');
 // app.use(express.json());
 
 // Socket.io setup
@@ -214,47 +216,89 @@ app.post("/api/v1/heart", (req, res) => {
 });
 
 // Route for Dengue Prediction
-app.post("/api/v1/dengue", (req, res) => {
-  const inputData = req.body; // Extract JSON input from request
-  if (!inputData) {
-    return res.status(400).json({ error: "No input data provided" });
+app.post("/api/v1/dengue",  async (req, res) => {
+  try {
+    // Validate request body
+    if (!req.body) {
+      return res.status(400).json({ error: 'No data provided' });
+    }
+
+    // Convert request body to JSON string for Python script
+    const inputData = JSON.stringify(req.body);
+
+    const options = {
+      scriptPath: path.join(__dirname),
+      args: [inputData]
+    };
+
+    const results = await PythonShell.run('dengue.py', options);
+    
+    try {
+      const prediction = JSON.parse(results[results.length - 1]); // Get the last line of output
+      res.json(prediction);
+    } catch (parseError) {
+      console.error('Error parsing Python output:', parseError);
+      res.status(500).json({
+        error: 'Error processing prediction',
+        details: results.join('\n')
+      });
+    }
+  } catch (error) {
+    console.error('Server error:', error);
+    res.status(500).json({
+      error: 'Server error',
+      details: error.message
+    });
   }
-  // Convert frontend data to required format
-  
-  console.log("Received dengue request with data:", req.body);
-  runPythonScript(res, pythonScriptPathForDengue, dengueModel, req.body);
 });
-app.post('/predict', (req, res) => {
-  const inputData = req.body;
 
-  // Spawn Python process
-  const python = spawn('python3', ['dengue.py', JSON.stringify(inputData)]);
-
-  let output = '';
-  let errorOutput = '';
-
-  python.stdout.on('data', (data) => {
-      output += data.toString();
-  });
-
-  python.stderr.on('data', (data) => {
-      errorOutput += data.toString();
-  });
-
-  python.on('close', (code) => {
-      try {
-          const jsonOutput = JSON.parse(output.trim());
-          res.json(jsonOutput);
-      } catch (err) {
-          res.status(500).json({
-              error: 'Failed to parse Python script output',
-              details: errorOutput || output
-          });
-      }
-  });
-});
 
 // Route for Skin Disease Prediction
+// Multer setup for file upload
+const upload = multer({
+  dest: "uploads/",
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if ([".jpg", ".jpeg", ".png"].includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only JPG, JPEG, and PNG images are allowed."));
+    }
+  },
+});
+
+app.post("/api/v1/skin", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No image uploaded" });
+  }
+
+  const options = {
+    scriptPath: __dirname, // <- use main folder
+    args: [path.join(__dirname, req.file.path)],
+    pythonOptions: ['-u'], // optional: unbuffered stdout
+  };
+
+  PythonShell.run("skin_disease.py", options)
+    .then((results) => {
+      try {
+        const prediction = JSON.parse(results[0]);
+        res.json(prediction);
+      } catch (error) {
+        console.error("Error parsing Python output:", error);
+        res.status(500).json({
+          error: "Error processing image",
+          details: results.join("\n"),
+        });
+      }
+    })
+    .catch((err) => {
+      console.error("Error running Python script:", err);
+      res.status(500).json({
+        error: "Error processing image",
+        details: err.message,
+      });
+    });
+});
 
 // Root Route
 app.get("/", (req, res) => {

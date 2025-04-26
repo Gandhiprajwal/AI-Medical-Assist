@@ -52,8 +52,14 @@ if __name__ == "__main__":
             predicted_class = torch.argmax(output, dim=1).item()
         
         # Return the prediction probabilities and class
-        print(f"Prediction: {class_names[predicted_class]}")
-        print(f"Probabilities: {probabilities.tolist()}")
+        import json
+
+        result = {
+            "prediction": class_names[predicted_class],
+            "probabilities": probabilities.tolist()
+        }
+        print(json.dumps(result))
+
     except Exception as e:
         print("Error:", e)
         sys.exit(1)
