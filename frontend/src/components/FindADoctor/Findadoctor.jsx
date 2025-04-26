@@ -8,7 +8,7 @@ const doctors = [
   {
     id: 1,
     image: doctorImage,
-    specialistType: "General Physician",
+    specialistType: "General & Primary Care",
     fullName: "Amit Mishra",
     rating: "4.5",
     location: "Delhi",
@@ -18,8 +18,8 @@ const doctors = [
   {
     id: 2,
     image: "https://via.placeholder.com/100",
-    specialistType: "Pediatrician",
-    fullName: "Emily Davis",
+    specialistType: "Child Health",
+    fullName: "Ruchi Kapoor",
     rating: "4.8",
     location: "Bangalore",
     about: "Dr. Emily Davis specializes in child healthcare and vaccinations.",
@@ -28,8 +28,8 @@ const doctors = [
   {
     id: 3,
     image: "https://via.placeholder.com/100",
-    specialistType: "Pediatrician",
-    fullName: "Emily Davis",
+    specialistType: "Child Health",
+    fullName: "Meena Chauhan",
     rating: "",
     location: "Bangalore",
     about: "Dr. Emily Davis specializes in child healthcare and vaccinations.",
@@ -38,8 +38,8 @@ const doctors = [
   {
     id: 4,
     image: "https://via.placeholder.com/100",
-    specialistType: "Pediatrician",
-    fullName: "Emily Davis",
+    specialistType: "Heart & Circulatory System",
+    fullName: "Rina Roy",
     rating: "4.8",
     location: "Bangalore",
     about: "Dr. Emily Davis specializes in child healthcare and vaccinations.",
