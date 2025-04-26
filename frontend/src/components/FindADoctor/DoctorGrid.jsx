@@ -4,16 +4,16 @@ import Card from "./Card";
 
 const DoctorGrid = ({ doctors, setSelectedDoctor }) => {
   return (
-    <section className="flex">
-      <div className="w-full h-132 overflow-y-auto py-3 px-6 dark:bg-[#000000]/88 bg-[#81B4B2]">
-        <div className="grid grid-cols-3 gap-4">
+    <section className="flex flex-col-reverse md:flex-row">
+      <div className="w-full h-132 overflow-y-auto py-3 md:px-6 px-12 dark:bg-[#000000]/88 bg-[#81B4B2]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {doctors.map((doctor, index) => (
             <Card key={index} doctor={doctor} onBookAppointment={setSelectedDoctor} />
           ))}
         </div>
       </div>
-      <div className="bg-[#A5DFE3] dark:bg-black dark:border-l dark:border-white w-1/3 h-full px-4 py-6 text-white">
-        <div className="w-full h-120 bg-[#7ca7aa] dark:bg-gray-900 flex flex-col px-6 py-4 gap-4 items-center rounded-lg overflow-auto">
+      <div className="bg-[#A5DFE3] dark:bg-black dark:border-l dark:border-white w-full md:w-2/3 lg:w-1/3 md:h-full h-1/2 md:px-4 px-12 py-6 text-white">
+        <div className="w-full h-38 md:h-120 bg-[#7ca7aa] dark:bg-gray-900 flex flex-col px-6 py-4 gap-4 items-center rounded-lg overflow-auto">
           <div className="relative w-full">
             <input className="w-full bg-white dark:bg-[#000000] dark:border dark:border-white dark:text-white rounded-lg text-sm py-2 text-slate-400 px-12 outline-none" type="text" placeholder="Search for specialist.." />
             <Search className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-400" />

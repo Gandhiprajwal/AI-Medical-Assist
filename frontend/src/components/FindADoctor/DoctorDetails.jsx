@@ -58,9 +58,19 @@ const DoctorDetails = ({ selectedDoctor, setSelectedDoctor }) => {
 
   if (selectedDoctor) {
   return (
-    <section className="w-full h-full bg-[#81B4B2] dark:bg-[#526768] p-4">
-        <div className="flex h-[calc(100vh-110px)] bg-[#f9f9f9] dark:bg-[#000000] relative rounded-lg">
-          <div className="w-1/2 p-6 bg-white dark:bg-[#000000] shadow-lg rounded-lg flex flex-col">
+    <section className="w-full h-auto bg-[#81B4B2] dark:bg-[#526768] p-4">
+        <div className="flex flex-col md:flex-row h-auto lg:h-[calc(100vh-110px)] bg-[#f9f9f9] dark:bg-[#000000] relative rounded-lg overflow-y-auto pb-8">
+
+        {/* back button to go back to doctor cards grid */}
+        <button
+            className="md:absolute relative md:top-4 md:right-6 flex items-center gap-2 dark:bg-[#286d7c] bg-[#2E93B1] hover:bg-[#257a8e] transition hover:cursor-pointer  text-white px-4 py-2 md:rounded-md shadow-md transition"
+            onClick={() => setSelectedDoctor(null)}
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back
+          </button>
+          <div className="w-full md:w-1/2 p-6 bg-white dark:bg-[#000000] shadow-lg rounded-lg flex flex-col">
+          
             <div className="flex gap-8">
               <img
                 src={selectedDoctor.image}
@@ -69,7 +79,7 @@ const DoctorDetails = ({ selectedDoctor, setSelectedDoctor }) => {
               />
               {/* Updating the check availability of doctor button to use dynamic text */}
               <button
-                className="w-48 text-center bg-slate-400 hover:bg-black dark:hover:bg-[#286d7c] hover:text-white hover:cursor-pointer drop-shadow-lg text-black px-2 py-1 rounded-md opacity-30"
+                className="w-full md:w-48 text-center bg-slate-400 hover:bg-black dark:hover:bg-[#286d7c] hover:text-white hover:cursor-pointer drop-shadow-lg text-black px-2 py-1 rounded-md opacity-30"
                 onClick={() => {
                   setModalIsOpen(true); // Opening the modal
                 }}
@@ -78,7 +88,7 @@ const DoctorDetails = ({ selectedDoctor, setSelectedDoctor }) => {
               </button>
 
               <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="w-full h-full dark:bg-[#000000]/70 Modal absolute">
-                <div className="bg-white dark:bg-[#000000] p-6 rounded-lg w-96 mx-auto mt-38 border-1 border-black dark:border-white">
+                <div className="bg-white dark:bg-[#000000] md:p-6 p-8 rounded-lg w-96 mx-auto mt-38 border-1 border-black dark:border-white">
                   <h2 className="text-lg dark:text-white font-semibold mb-4">Check Availability</h2>
                   <input
                     type="date"
@@ -156,8 +166,8 @@ const DoctorDetails = ({ selectedDoctor, setSelectedDoctor }) => {
               </Modal>
             </div>
 
-            <h2 className="text-xl dark:text-white font-bold">Dr. {selectedDoctor.fullName}</h2>
-            <div className="flex gap-4 items-center pt-2 text-sm">
+            <h2 className="text-lg md:text-xl pt-4 md:pt-0 dark:text-white font-bold text-center md:text-left">Dr. {selectedDoctor.fullName}</h2>
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center pt-2 text-sm">
               <p className="text-gray-500 dark:text-gray-400">{selectedDoctor.specialistType}</p>
               <div className="flex items-center ">
                 <Star className="w-4 h-4 text-yellow-500 mr-1" />
@@ -165,7 +175,7 @@ const DoctorDetails = ({ selectedDoctor, setSelectedDoctor }) => {
               </div>
               <div className="flex items-center">
                 <MapPin className="w-4 h-4 text-gray-500 mr-1" />
-                <span>{selectedDoctor.location}</span>
+                <span className="dark:text-white">{selectedDoctor.location}</span>
               </div>
             </div>
             <p className="mt-4 text-gray-700 dark:text-gray-500 text-sm text-justify">
@@ -179,12 +189,12 @@ const DoctorDetails = ({ selectedDoctor, setSelectedDoctor }) => {
               ))}
             </ul>
           </div>
-          <div className="w-1/2 p-6 bg-[#a5dfe3] dark:bg-[#000000] dark:border-l dark:border-white flex flex-col rounded-lg rounded-tl-none rounded-bl-none">
+          <div className="w-full md:w-1/2 p-6 bg-[#a5dfe3] dark:bg-[#000000] dark:md:border-l dark:border-white flex flex-col md:flex-row rounded-lg md:rounded-l-none">
             
             {/* reviews showing up on the basis of selected doctor card */}
             {selectedDoctor && (
-              <div>
-                <h2 className="text-lg text-[#0C8667] dark:text-white font-semibold mb-4">{selectedDoctor.fullName}'s Reviews</h2>
+              <div className="w-full">
+                <h2 className="text-lg text-[#0C8667] dark:text-white font-semibold mb-4 text-center md:text-left">{selectedDoctor.fullName}'s Reviews</h2>
                 {reviews.filter(review => review.doctorId === selectedDoctor.id).length > 0 ? (
                   <div className="space-y-4 text-sm h-32 overflow-y-auto">
                     {reviews
@@ -217,7 +227,7 @@ const DoctorDetails = ({ selectedDoctor, setSelectedDoctor }) => {
                     className="w-full h-24 p-2 border border-slate-900 dark:border-white dark:text-white rounded-md"
                     placeholder="Write a comment..."
                   />
-                  <button className="flex items-center absolute right-6 gap-2 mt-2 bg-[#2E93B1] dark:bg-[#286d7c] text-white px-4 py-2 rounded-md hover:bg-[#257a8e] transition cursor-pointer">
+                  <button className="flex items-center absolute md:relative md:right-6 left-6 md:left-0 gap-2 mt-2 bg-[#2E93B1] dark:bg-[#286d7c] text-white px-4 py-2 rounded-md hover:bg-[#257a8e] transition cursor-pointer">
                     <Send className="w-4 h-4" />
                     Submit
                   </button>
@@ -225,19 +235,10 @@ const DoctorDetails = ({ selectedDoctor, setSelectedDoctor }) => {
               </div>
             )}
           </div>
-
-          {/* back button to go back to doctor cards grid */}
-          <button
-            className="absolute top-4 right-6 flex items-center gap-2 dark:bg-[#286d7c] bg-[#2E93B1] hover:bg-[#257a8e] transition hover:cursor-pointer  text-white px-4 py-2 rounded-md shadow-md transition"
-            onClick={() => setSelectedDoctor(null)}
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Back
-          </button>
-
+          
           {/* Pay button at the bottom */}
           <button
-            className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 px-6 py-3 border-1 rounded-md ${availability
+            className={`md:absolute relative mt-10 md:mt-0 md:bottom-6 md:left-1/2 transform md:-translate-x-1/2 px-6 py-3 border-1 rounded-md ${availability
                 ? "bg-[#2E93B1] dark:bg-[#286D7C] hover:bg-[#257a8e] transition hover:cursor-pointer text-white drop-shadow-lg"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed border-2 dark:border-2"
               }`}
