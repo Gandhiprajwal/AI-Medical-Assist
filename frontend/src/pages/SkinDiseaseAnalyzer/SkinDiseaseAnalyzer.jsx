@@ -20,6 +20,7 @@ const SkinDiseaseAnalyzer = () => {
 
   // Handle form submission
   const handleSubmit = async (e) => {
+    setPrediction(null); // Reset prediction on new submission
     e.preventDefault();
 
     if (!image) {
@@ -93,13 +94,13 @@ const SkinDiseaseAnalyzer = () => {
         {prediction !== null && (
           <div
             className={`mt-6 p-4 rounded text-center ${
-              prediction.highRisk ? "bg-red-400" : "bg-green-400"
+              prediction!=='Normal' ? "bg-red-400" : "bg-green-400"
             }`}
           >
             <h3 className="text-lg font-bold">
-              {prediction.highRisk
-                ? "High Risk! Please consult a dermatologist immediately."
-                : "Low Risk! Likely not serious, but monitor symptoms."}
+              {prediction !=="Normal"
+                ? `High Risk! Please consult a dermatologist immediately. -> ${prediction}`
+                : `Low Risk! Likely not serious, but monitor symptoms. -> ${prediction}`}
             </h3>
           </div>
         )}

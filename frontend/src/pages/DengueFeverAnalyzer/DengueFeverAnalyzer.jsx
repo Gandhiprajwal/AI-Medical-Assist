@@ -30,7 +30,7 @@ const DengueFeverAnalyzer = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setPrediction(null); // Reset prediction on new submission
     const isFormComplete = Object.values(inputData).every(
       (field) => field !== ""
     );
@@ -233,11 +233,11 @@ const DengueFeverAnalyzer = () => {
         {prediction !== null && (
           <div
             className={`mt-6 p-4 rounded text-center ${
-              prediction === 1 ? "bg-red-400" : "bg-green-400"
+              prediction === "positive" ? "bg-red-400" : "bg-green-400"
             }`}
           >
             <h3 className="text-lg font-bold">
-              {prediction === 1
+              {prediction === "positive"
                 ? "High Risk! Please consult a doctor immediately."
                 : "Low Risk! You're in good health."}
             </h3>

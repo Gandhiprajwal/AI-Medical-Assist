@@ -8,7 +8,8 @@ const createToken = (userId, role) => {
 // Signup controller
 exports.signup = async (req, res) => {
     try {
-        const { fullname, emailorphone, password, isDoctor } = req.body;
+        const {fullName:fullname, emailOrPhone:emailorphone, password, isDoctor } = req.body;
+        console.log("Signup Data:", req.body);
 
         if (!fullname || !emailorphone || !password) {
             return res.status(400).json({ message: "All fields are required." });

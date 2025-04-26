@@ -64,6 +64,7 @@ const HeartDiseaseAnalyzer = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setPrediction(null); // Reset prediction on new submission
     const isFormComplete = Object.values(inputData).every((field) => field !== "");
     if (!isFormComplete) {
       setFormError("Please fill out all fields.");

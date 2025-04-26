@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { AUTH_API_URL } from "../../config";
+import { useNavigate } from 'react-router-dom'; // import useNavigate
 
 const SignUp = () => {
   const [fullName, setFullName] = useState("");
@@ -7,7 +10,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-
+  const navigate = useNavigate(); // initialize navigate
   const handleValidation = () => {
     const newErrors = {};
 
@@ -55,9 +58,44 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     if (handleValidation()) {
       console.log("Form submitted successfully!");
-      // Add actual sign-up logic here
+  
+      axios.post(AUTH_API_URL + "/signup", { 
+        fullName, 
+        emailOrPhone, 
+        password, 
+        isDoctor: false 
+      })
+      .then(response => {
+        console.log("Sign-up successful:", response.data);
+  
+        // Save the JWT token
+        localStorage.setItem("token", response.data.token);
+  
+        // Redirect to Home
+        navigate("/");
+  
+        // Clear the form
+        setFullName("");
+        setEmailOrPhone("");
+        setPassword("");
+        setConfirmPassword("");
+        setErrors({});
+      })
+      .catch(error => {
+        console.error("Error during sign-up:", error);
+  
+        // Check if error response contains data
+        if (error.response && error.response.data) {
+          // Save server-side validation errors
+          setErrors(error.response.data);
+        } else {
+          // If no detailed response, save a generic error
+          setErrors({ general: "Something went wrong. Please try again." });
+        }
+      });
     }
   };
 

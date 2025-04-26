@@ -60,7 +60,7 @@ mongoose = require("./db/dbConfig");
 // Routes
 const authRoutes = require("./Routes/auth");
 // const aiRoutes = require("./Routes/aiModesRoute");
-// app.use("/api/v1",aiRoutes);
+app.use("/api/v1",require("./Routes/healthPredict"));
 app.use("/api/v2/auth", authRoutes);
 // Routes
 app.use("/api/v3/appointments", require("./Routes/appointmentRoutes"));
@@ -219,12 +219,25 @@ app.post("/api/v1/heart", (req, res) => {
 app.post("/api/v1/dengue",  async (req, res) => {
   try {
     // Validate request body
+    const frontendData = req.body;
+
+    const formattedData = {
+      "Sex": frontendData.sex,
+      "Haemoglobin": frontendData.haemoglobin,
+      // "WBC Count": frontendData.wbcCount,
+      "Differential Count": frontendData.differentialCount,
+      "RBC PANEL": frontendData.rbcPanel,
+      "PDW": frontendData.pdw,
+      "Age_Group": frontendData.ageGroup
+    };
+
     if (!req.body) {
       return res.status(400).json({ error: 'No data provided' });
     }
 
     // Convert request body to JSON string for Python script
-    const inputData = JSON.stringify(req.body);
+    const inputData = JSON.stringify(formattedData);
+    console.log("Input data for Python script:", inputData);
 
     const options = {
       scriptPath: path.join(__dirname),
