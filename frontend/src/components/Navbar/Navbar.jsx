@@ -21,7 +21,7 @@ const Navbar = () => {
   }, [isHovered]);
 
   return (
-    <nav className="h-20 bg-white dark:bg-[#000000] flex justify-between items-center px-6 drop-shadow-md sm:px-4 md:px-8 gap-4 w-full">
+    <nav className="relative z-50 h-20 bg-white dark:bg-[#000000] flex justify-between items-center px-6 drop-shadow-md sm:px-4 md:px-8 gap-4 w-full">
       {/* Left Section (Logo & Title) */}
       <motion.div
         className="flex flex-row items-center sm:w-auto md:w-1/3"
@@ -136,7 +136,7 @@ const Navbar = () => {
       <AnimatePresence></AnimatePresence>
       {isOpen && (
         <motion.div
-          className="absolute z-50 h-fit pb-6 top-20 right-0 w-full bg-white dark:bg-black shadow-lg flex flex-col items-start pl-6 md:hidden gap-4"
+          className="absolute h-fit pb-6 top-20 right-0 w-full bg-white dark:bg-black shadow-lg flex flex-col items-start pl-6 md:hidden gap-4"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}

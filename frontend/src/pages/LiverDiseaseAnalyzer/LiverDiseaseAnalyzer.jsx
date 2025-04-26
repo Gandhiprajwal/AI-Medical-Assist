@@ -117,13 +117,13 @@ const LiverDiseaseAnalyzer = () => {
 
   return (
     <section
-      className="w-full h-128 px-16 bg-[#81B4B2]/75 bg-cover bg-center overflow-y-auto"
+      className="pb-4 w-full h-auto px-6 md:px-16 bg-[#81B4B2]/75 bg-cover bg-center overflow-y-auto"
       style={{
         backgroundImage: `url(${bgImage})`,
       }}
     >
       <div
-        className="w-full h-full p-8 pt-3 rounded-3xl shadow-lg border-1 border-red-200 bg-[#250902]/93 text-white"
+        className="w-full h-full p-6 md:p-8 rounded-3xl shadow-lg border-1 border-red-200 bg-[#250902]/93 text-white"
         style={{
           boxShadow: "8px 8px 4px rgba(183, 28, 28, 0.57)",
         }}
@@ -134,7 +134,7 @@ const LiverDiseaseAnalyzer = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <div>
             {/* <h2 className="text-lg font-semibold mb-3">Basic Information</h2> */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm">
                   Age (18 - 100 years):
@@ -175,7 +175,7 @@ const LiverDiseaseAnalyzer = () => {
             {/* <h2 className="text-lg font-semibold mb-3">
               Liver Health Parameters
             </h2> */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Liver Health Fields */}
               <div>
                 <label className="block text-sm font-medium">

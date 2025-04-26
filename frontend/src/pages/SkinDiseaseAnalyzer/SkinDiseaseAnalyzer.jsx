@@ -49,22 +49,22 @@ const SkinDiseaseAnalyzer = () => {
 
   return (
     <section
-      className="w-full h-128 py-6 pt-4 px-16 bg-[#FFABAB]/75 bg-cover bg-center overflow-y-auto"
+      className="w-full h-128 py-6 pt-4 px-6 md:px-16 bg-[#FFABAB]/75 bg-cover bg-center overflow-y-auto"
       style={{
         backgroundImage: `url(${bgImage})`,
       }}
     >
       <div
-        className="w-full h-full p-8 pt-3 rounded-3xl shadow-lg border-1 border-blue-200 bg-black/55 text-white"
+        className="w-full h-full p-6 md:p-8 rounded-3xl shadow-lg border-1 border-blue-200 bg-black/55 text-white"
         style={{
           boxShadow: "8px 8px 4px rgba(18, 107, 127, 0.57)",
         }}
       >
-        <h2 className="text-2xl font-bold text-center mb-4 mt-32">
+        <h2 className="text-xl md:text-2xl font-bold text-center mb-4 mt-32">
           Skin Disease Analyzer
         </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 items-center">
-          <div>
+          <div className="">
             <label className="block text-sm font-medium mb-2">
               Upload an image of the affected skin:
             </label>
