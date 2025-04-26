@@ -55,27 +55,27 @@ const DengueFeverAnalyzer = () => {
 
   return (
     <section
-      className="w-full h-128 py-6 pt-4 px-16 bg-[#8EB1C7]/75 bg-cover bg-center overflow-y-auto"
+      className="w-full h-auto py-6 pt-4 px-6 md:px-16 bg-[#8EB1C7]/75 bg-cover bg-center overflow-y-auto"
       style={{
         backgroundImage: `url(${bgImage})`,
       }}
     >
       <div
-        className="w-full h-full p-8 pt-3 rounded-3xl shadow-lg border-1 border-blue-200 bg-[#10375C]/85 text-white"
+        className="w-full h-full p-6 md:p-8 rounded-3xl shadow-lg border-1 border-blue-200 bg-[#10375C]/85 text-white"
         style={{
           boxShadow: "8px 8px 4px rgba(28, 60, 183, 0.47)",
         }}
       >
-        <h2 className="text-2xl font-bold text-center mb-10">
+        <h2 className="text-xl md:text-2xl font-bold text-center mb-6">
           Dengue Fever Analyzer
         </h2>
         <form onSubmit={handleSubmit} className="flex gap-4">
           {/* Left Column */}
-          <div className="flex flex-col gap-4 w-1/2 pr-2">
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-1/2 pr-2">
             {/* Basic Info Section */}
             <div className="pb-4 flex flex-col">
               <h2 className="text-lg font-semibold mb-3">Basic Information</h2>
-              <div className="flex w-full gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm">Age Group:</label>
                   <select
@@ -129,7 +129,7 @@ const DengueFeverAnalyzer = () => {
             {/* Haemoglobin & WBC Count Section */}
             <div className="pb-4 flex flex-col">
               <h2 className="text-lg font-semibold mb-3">Blood Parameters</h2>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium">
                     Haemoglobin (11.00 - 18.60):
@@ -167,11 +167,11 @@ const DengueFeverAnalyzer = () => {
           </div>
 
           {/* Right Column */}
-          <div className="border-l flex flex-col pl-8 gap-4 w-1/2">
+          <div className="border-l flex flex-col pl-8 gap-4 w-full md:w-1/2">
             {/* Additional Blood Parameters Section */}
             <div>
               <h2 className="text-lg font-semibold mb-3">Blood Analysis Details</h2>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium">
                     Differential Count:

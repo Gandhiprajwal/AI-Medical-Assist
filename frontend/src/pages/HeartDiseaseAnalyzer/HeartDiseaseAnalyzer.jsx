@@ -88,18 +88,18 @@ const HeartDiseaseAnalyzer = () => {
 
   return (
     <section
-      className="opacity-95 w-full h-128 py-5 pb-8 px-20 bg-[#81B4B2] bg-cover bg-center overflow-y-auto"
+      className="z-0 opacity-95 z-4 w-full h-auto py-5 pb-8 px-6 md:px-20 bg-[#81B4B2] bg-cover bg-center overflow-y-auto"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div
-        className="w-full h-full p-8 pt-3 border-1 border-[#000443] rounded-3xl shadow-lg bg-[#000433]/90 text-white"
+        className="w-full h-full p-6 md:p-8 md:pt-3 mt-6 border-1 border-[#000443] rounded-3xl shadow-lg bg-[#000433]/90 text-white"
         style={{ boxShadow: "8px 8px 4px rgba(129, 185, 192, 0.57)" }}
       >
-        <h2 className="text-2xl font-bold text-center mb-4">Heart Disease Analyzer</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-center mb-4">Heart Disease Analyzer</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="flex gap-4 w-full">
+          <div className="flex flex-col md:flex-row gap-4 w-full">
             {/* Basic Info Section */}
-            <div className="pb-4 flex flex-col w-1/2">
+            <div className="pb-4 flex flex-col w-full md:w-1/2">
               <h2 className="text-lg font-semibold mb-3">Basic Information</h2>
               <div className="flex flex-col w-full gap-3">
                 <div>
@@ -134,7 +134,7 @@ const HeartDiseaseAnalyzer = () => {
             {/* Health Parameters Section */}
             <div className="pb-4 w-full">
               <h2 className="text-lg font-semibold mb-3">Health Parameters</h2>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm">
                     Heart Rate (50 - 120 bpm):

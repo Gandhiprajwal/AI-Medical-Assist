@@ -44,10 +44,10 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="flex w-full h-screen">
-        <div className="w-1/2 p-10 dark:bg-black flex items-center justify-center">
+      <div className="flex flex-col md:flex-row w-full h-screen">
+        <div className="w-full h-screen lg:w-1/2 p-10 dark:bg-black flex items-center justify-center">
           <form
-            className="w-full rounded-2xl h-fit py-6 drop-shadow-lg"
+            className="w-full rounded-2xl h-fit py-6 drop-shadow-lg max-w-md"
             style={{
               backgroundColor: "rgba(14, 217, 208, 0.30)",
               boxShadow: "4px 4px 3px rgba(10, 11, 11, 0.55)",
@@ -82,15 +82,15 @@ const SignIn = () => {
               )}
               <button
                 type="submit"
-                className="cursor-pointer py-3 w-full rounded-md bg-[#409FB6] text-white drop-shadow-md hover:bg-[#338096]/70"
+                className="cursor-pointer py-3 w-full rounded-md bg-[#409FB6] text-sm md:text-lg text-white drop-shadow-md hover:bg-[#338096]/70"
               >
                 Sign In
               </button>
             </div>
             <p className="text-center text-gray-400 pb-4">Or</p>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center px-8">
               <Link
-                className="flex items-center gap-4 cursor-pointer bg-white px-8 py-2 rounded-lg"
+                className="w-full flex items-center justify-center gap-4 cursor-pointer bg-white px-8 py-2 rounded-lg text-xs md:text-sm"
                 to={"/"}
               >
                 <img src="./google_icon.png" className="w-8 h-8" alt="Google Icon" />
@@ -99,13 +99,13 @@ const SignIn = () => {
             </div>
           </form>
         </div>
-        <div className="">
+        <div className="hidden lg:block lg:w-1/2">
           <img
             src="./login-signup_image.jpg"
             className="h-full w-full relative"
             alt="Sign In Banner"
           />
-          <div className="p-8 py-12 text-white absolute top-0 w-[65%] h-full dark:bg-black/75 bg-[#2E93B1]/75">
+          <div className="p-8 py-12 text-white absolute top-0 w-1/2 h-full dark:bg-black/75 bg-[#2E93B1]/75">
             <h2 className="text-3xl font-semibold">WELCOME TO</h2>
             <h3 className="text-3xl font-semibold pb-8">
               AI MEDICAL ASSIST WEB APP!
