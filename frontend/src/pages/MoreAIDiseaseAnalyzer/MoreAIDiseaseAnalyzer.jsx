@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../MoreAIDiseaseAnalyzer/Card"
+import MoreAICard from "../MoreAIDiseaseAnalyzer/MoreAICard";
 const MoreAIDiseaseAnalyzer = () => {
     const cardsData = [
         { title: "Heart Disease Analyzer", description: "Heart disease occurs due to factors like high blood pressure...", url: "/heart-disease-analyzer", img: "./heart-img.png", disabled: false },
@@ -33,7 +33,7 @@ const MoreAIDiseaseAnalyzer = () => {
     return (
         <section className="h-auto w-full bg-cover dark:bg-[#000000] bg-center flex flex-col items-center justify-center md:px-16 px-8 py-10 grid grid-cols-1 lg:grid-cols-3 gap-4" style={{ backgroundImage: `url('/image3.png')` }}>
             {cardsData.map((card, index) => (
-                <Card 
+                <MoreAICard 
                     key={index}
                     title={card.title}
                     description={card.description}
