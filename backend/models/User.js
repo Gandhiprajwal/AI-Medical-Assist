@@ -9,36 +9,32 @@ const userSchema = new mongoose.Schema({
     role: { type: String, default: "user" },
     isDoctor: { type: Boolean, default: false },
     isPatient: { type: Boolean, default: true },
-
     // Doctor specific fields
     image: { type: String, default: "" },
     specialistType: { type: String }, // already exists
-    specialization: { type: String }, // ✅ Add this
-    experience: { type: String },     // ✅ Add this
-    qualification: { type: String },  // ✅ Add this
-    consultationFees: { type: String }, // ✅ Add this
-    about: { type: String }, // ✅ Add this
-    hospitalName: { type: String }, // ✅ Add this
-    contactNumber: { type: String }, // ✅ Add this
+    specialization: { type: String },
+    experience: { type: String },
+    qualification: { type: String },
+    consultationFees: { type: String },
+    about: { type: String },
+    hospitalName: { type: String },
+    contactNumber: { type: String },
     rating: { type: String, default: "4.0" },
     location: { type: String },
     about: { type: String },
     keyPoints: [{ type: String }],
-    availability: {
-        type: Map,
-        of: String
-    },
+    availability: { type: Map, of: String },
     profileCompleted: { type: Boolean, default: false },
-
     // Relations
     appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }],
     medicalHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "MedicalHistory" }],
-
     profilePicture: { type: String, default: "" },
     resetToken: String,
     resetTokenExpiration: Date
 });
 
+// Indexing the emailorphone field
+userSchema.index({ emailorphone: 1 });  // Index on emailorphone for faster lookups
 
 // Hash password
 userSchema.pre("save", async function (next) {

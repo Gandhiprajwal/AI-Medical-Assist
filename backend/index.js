@@ -10,8 +10,21 @@ const PORT = 3000;
 const socketIo = require("socket.io");
 const http = require("http");
 const multer = require("multer");
-const { PythonShell } = require('python-shell');
+const { PythonShell } = require("python-shell");
+const helmet = require("helmet");
+const logRequest = require("./middleware/loggerMiddleware.js");
+const {Sentry,Handlers} = require('./utils/sentry.js');  // Import the Sentry configuration
+// const Sentry = require("@sentry/node");
 // app.use(express.json());
+
+// Sentry configuration
+// Sentry.init({
+//   dsn: process.env.SENTRY_DSN,
+//   // tracesSampleRate: 1.0, // Adjust this value in production
+//   // environment: process.env.NODE_ENV || "development",
+//   // debug: true, // Enable debug mode for Sentry
+//   // // Add any other Sentry options you need
+// });
 
 // Socket.io setup
 const server = http.createServer(app);
@@ -43,6 +56,23 @@ if (!fs.existsSync(PYTHON_PATH)) {
   PYTHON_PATH = GLOBAL_PYTHON_PATH;
 }
 
+//Secure your application with X-Content-Type-Options, X-XSS-Protection, Strict-Transport-Security, and Content-Security-Policy headers.
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://trusted-cdn.com"],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
+    },
+    crossOriginEmbedderPolicy: true,
+    crossOriginOpenerPolicy: "same-origin",
+    referrerPolicy: { policy: "no-referrer" },
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -57,14 +87,31 @@ app.set("io", io);
 // Mongoose Connection
 mongoose = require("./db/dbConfig");
 
+// Enable Sentry's Request Handler to capture HTTP request data
+// console.log(Sentry)
+// app.use(Handlers.requestHandler());
+
+// Use logging middleware for all routes
+app.use(logRequest);
+
 // Routes
 const authRoutes = require("./Routes/auth");
+const {
+  healthPredictLimiter,
+  authLimiter,
+  appointmentLimiter,
+  doctorLimiter,
+} = require("./utils/rateLimiter.js");
 // const aiRoutes = require("./Routes/aiModesRoute");
-app.use("/api/v1",require("./Routes/healthPredict"));
-app.use("/api/v2/auth", authRoutes);
+app.use("/api/v1", healthPredictLimiter, require("./Routes/healthPredict"));
+app.use("/api/v2/auth", authLimiter, authRoutes);
 // Routes
-app.use("/api/v3/appointments", require("./Routes/appointmentRoutes"));
-app.use("/api/v4/doctors", require("./Routes/doctorRoute")); // doctor routes for availability
+app.use(
+  "/api/v3/appointments",
+  appointmentLimiter,
+  require("./Routes/appointmentRoutes")
+);
+app.use("/api/v4/doctors", doctorLimiter, require("./Routes/doctorRoute")); // doctor routes for availability
 
 // Socket connection
 io.on("connection", (socket) => {
@@ -216,23 +263,23 @@ app.post("/api/v1/heart", (req, res) => {
 });
 
 // Route for Dengue Prediction
-app.post("/api/v1/dengue",  async (req, res) => {
+app.post("/api/v1/dengue", async (req, res) => {
   try {
     // Validate request body
     const frontendData = req.body;
 
     const formattedData = {
-      "Sex": frontendData.sex,
-      "Haemoglobin": frontendData.haemoglobin,
+      Sex: frontendData.sex,
+      Haemoglobin: frontendData.haemoglobin,
       // "WBC Count": frontendData.wbcCount,
       "Differential Count": frontendData.differentialCount,
       "RBC PANEL": frontendData.rbcPanel,
-      "PDW": frontendData.pdw,
-      "Age_Group": frontendData.ageGroup
+      PDW: frontendData.pdw,
+      Age_Group: frontendData.ageGroup,
     };
 
     if (!req.body) {
-      return res.status(400).json({ error: 'No data provided' });
+      return res.status(400).json({ error: "No data provided" });
     }
 
     // Convert request body to JSON string for Python script
@@ -241,30 +288,29 @@ app.post("/api/v1/dengue",  async (req, res) => {
 
     const options = {
       scriptPath: path.join(__dirname),
-      args: [inputData]
+      args: [inputData],
     };
 
-    const results = await PythonShell.run('dengue.py', options);
-    
+    const results = await PythonShell.run("dengue.py", options);
+
     try {
       const prediction = JSON.parse(results[results.length - 1]); // Get the last line of output
       res.json(prediction);
     } catch (parseError) {
-      console.error('Error parsing Python output:', parseError);
+      console.error("Error parsing Python output:", parseError);
       res.status(500).json({
-        error: 'Error processing prediction',
-        details: results.join('\n')
+        error: "Error processing prediction",
+        details: results.join("\n"),
       });
     }
   } catch (error) {
-    console.error('Server error:', error);
+    console.error("Server error:", error);
     res.status(500).json({
-      error: 'Server error',
-      details: error.message
+      error: "Server error",
+      details: error.message,
     });
   }
 });
-
 
 // Route for Skin Disease Prediction
 // Multer setup for file upload
@@ -288,7 +334,7 @@ app.post("/api/v1/skin", upload.single("image"), (req, res) => {
   const options = {
     scriptPath: __dirname, // <- use main folder
     args: [path.join(__dirname, req.file.path)],
-    pythonOptions: ['-u'], // optional: unbuffered stdout
+    pythonOptions: ["-u"], // optional: unbuffered stdout
   };
 
   PythonShell.run("skin_disease.py", options)
@@ -316,6 +362,15 @@ app.post("/api/v1/skin", upload.single("image"), (req, res) => {
 // Root Route
 app.get("/", (req, res) => {
   res.send("Hello, World!");
+});
+
+// Enable Sentry's Error Handler to capture any unhandled errors
+// app.use(Handlers.errorHandler());
+
+// Global error handler (you can also log to a file here if needed)
+app.use((err, req, res, next) => {
+  console.error(`Error occurred on route: ${req.originalUrl}`, err);
+  res.status(500).send('Internal Server Error');
 });
 
 // Start Server

@@ -1,0 +1,51 @@
+2025-04-27T16:45:35.441Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-04-27T16:45:35.535Z [info]: Response sent for: POST /api/v2/auth/signin with status: 200
+2025-04-27T16:46:36.702Z [info]: Incoming request: GET /api/v2/auth/user
+2025-04-27T16:46:36.726Z [info]: Response sent for: GET /api/v2/auth/user with status: 200
+2025-04-27T16:46:47.640Z [info]: Incoming request: POST /api/v1/liver
+2025-04-27T16:46:51.639Z [info]: Response sent for: POST /api/v1/liver with status: 200
+2025-04-27T17:32:40.407Z [info]: Incoming request: GET /api/v2/auth/user
+2025-04-27T17:32:40.420Z [info]: Response sent for: GET /api/v2/auth/user with status: 200
+2025-04-27T17:35:18.665Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-04-27T17:35:18.670Z [info]: Response sent for: POST /api/v2/auth/signin with status: 400
+2025-04-27T18:08:59.728Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-04-27T18:10:36.269Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-04-27T18:10:36.350Z [info]: Response sent for: POST /api/v2/auth/signin with status: 200
+2025-04-27T18:13:48.300Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-04-27T18:13:48.405Z [info]: Response sent for: POST /api/v2/auth/signin with status: 200
+2025-04-27T18:14:00.577Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-04-27T18:15:02.521Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-04-27T18:15:02.602Z [info]: Response sent for: POST /api/v2/auth/signin with status: 200
+2025-04-27T18:18:39.139Z [info]: Incoming request: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25
+2025-04-27T18:18:39.143Z [info]: Response sent for: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25 with status: 401
+2025-04-27T18:18:43.987Z [info]: Incoming request: GET /api/v4/doctors/
+2025-04-27T18:18:43.989Z [info]: Response sent for: GET /api/v4/doctors/ with status: 401
+2025-04-27T18:18:50.936Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-04-27T18:18:51.000Z [info]: Response sent for: POST /api/v2/auth/signin with status: 200
+2025-04-27T18:19:00.357Z [info]: Incoming request: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25
+2025-04-27T18:19:00.386Z [info]: Response sent for: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25 with status: 200
+2025-04-27T18:19:01.898Z [info]: Incoming request: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25
+2025-04-27T18:19:01.905Z [info]: Response sent for: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25 with status: 200
+2025-04-27T18:19:03.076Z [info]: Incoming request: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25
+2025-04-27T18:19:03.083Z [info]: Response sent for: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25 with status: 200
+2025-04-27T18:19:09.442Z [info]: Incoming request: GET /api/v4/doctors/
+2025-04-27T18:19:09.468Z [info]: Response sent for: GET /api/v4/doctors/ with status: 200
+2025-04-27T18:19:10.649Z [info]: Incoming request: GET /api/v4/doctors/
+2025-04-27T18:19:10.654Z [info]: Response sent for: GET /api/v4/doctors/ with status: 200
+2025-04-27T18:19:11.591Z [info]: Incoming request: GET /api/v4/doctors/
+2025-04-27T18:19:11.595Z [info]: Response sent for: GET /api/v4/doctors/ with status: 200
+2025-04-27T18:38:22.942Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-04-27T18:47:52.838Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-04-27T18:51:15.157Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-04-27T18:51:46.023Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-04-27T18:51:46.039Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
+2025-04-27T18:51:47.731Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-04-27T18:51:47.736Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
+2025-04-27T18:54:14.635Z [info]: Incoming request: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25
+2025-04-27T18:54:14.661Z [info]: Response sent for: GET /api/v4/doctors//availability/6806122274fcb688ef6ded8e?date=2025-04-25 with status: 200
+2025-04-27T18:54:20.079Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-04-27T18:54:20.084Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
+2025-04-27T18:54:21.566Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-04-27T18:54:21.571Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
+2025-04-27T18:57:09.656Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-04-27T18:57:09.660Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
