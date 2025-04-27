@@ -15,7 +15,7 @@ const DoctorGrid = ({ doctors, setSelectedDoctor }) => {
       <div className="w-full h-132 overflow-y-auto py-3 md:px-6 px-12 dark:bg-[#000000]/88 bg-[#81B4B2]">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {filteredDoctors.map((doctor, index) => (
-            <Card key={index} doctor={doctor} onBookAppointment={setSelectedDoctor} />
+            <Card />
           ))}
         </div>
       </div>

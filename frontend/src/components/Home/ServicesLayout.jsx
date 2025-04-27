@@ -102,22 +102,6 @@ const ServicesLayout = ({ services }) => {
         />
       </motion.div>
 
-      {/* Clickable Button */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 2 }}
-      >
-        <Link
-          to="/more-analyzers"
-          className="bg-white dark:bg-green-900 dark:text-white hover:cursor-pointer text-black py-2 px-4 rounded-md font-semibold shadow-lg"
-        >
-          More AI Disease Analyzer
-        </Link>
-      </motion.div>
-
       {/* Services Cards Layout */}
       <div className="relative flex flex-wrap items-center justify-center w-full">
         <div className="flex flex-wrap items-center gap-16 w-full">
@@ -127,7 +111,21 @@ const ServicesLayout = ({ services }) => {
             <ServiceCard {...services[1]} direction="right" />
           </div>
           {/* Empty center space */}
-          <div className="w-32" /> {/* Adjust spacing between card columns */}
+          {/* Clickable Button */}
+      <motion.div
+        className="w-full flex items-center justify-center"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 2 }}
+      >
+        <Link
+          to="/more-analyzers"
+          className="text-white text-center border border-b-2 lg:border-none hover:cursor-pointer text-black py-2 px-4 rounded-md font-semibold "
+        >
+          Click here to explore more AI Disease Analyzer!
+        </Link>
+      </motion.div>{/* Adjust spacing between card columns */}
           {/* Right side cards */}
           <div className="flex flex-col lg:flex-row lg:justify-evenly gap-20 md:gap-30 w-full">
             <ServiceCard {...services[2]} direction="left" />

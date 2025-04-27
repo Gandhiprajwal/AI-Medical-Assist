@@ -11,6 +11,7 @@ import SkinDiseaseAnalyzer from "./pages/SkinDiseaseAnalyzer/SkinDiseaseAnalyzer
 import DengueFeverAnalyzer from "./pages/DengueFeverAnalyzer/DengueFeverAnalyzer";
 import SignUp from "./pages/SignupSignin/SignUp";
 import SignIn from "./pages/SignupSignin/SingIn";
+import MoreAIDiseaseAnalyzer from "./pages/MoreAIDiseaseAnalyzer/MoreAIDiseaseAnalyzer";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
@@ -55,6 +56,8 @@ function MainApp() {
           path="/dengue-fever-analyzer"
           element={<DengueFeverAnalyzer />}
         />
+        <Route
+          path="/more-analyzers" element={<MoreAIDiseaseAnalyzer />} />
       </Routes>
       {!isExcludedRoute && <Footer />}
     </>
