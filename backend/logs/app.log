@@ -49,3 +49,11 @@
 2025-04-27T18:54:21.571Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
 2025-04-27T18:57:09.656Z [info]: Incoming request: GET /api/v3/appointments/patient
 2025-04-27T18:57:09.660Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
+2025-04-28T17:53:06.894Z [info]: Incoming request: GET /
+2025-04-28T17:53:06.920Z [info]: Response sent for: GET / with status: 200
+2025-04-28T17:53:07.689Z [info]: Incoming request: GET /favicon.ico
+2025-04-28T17:53:07.699Z [info]: Response sent for: GET /favicon.ico with status: 404
+2025-04-28T17:59:21.992Z [info]: Incoming request: POST /api/v1/skin
+2025-04-28T18:00:37.277Z [info]: Response sent for: POST /api/v1/skin with status: 200
+2025-04-28T18:00:53.162Z [info]: Incoming request: POST /api/v1/skin
+2025-04-28T18:01:01.290Z [info]: Response sent for: POST /api/v1/skin with status: 200

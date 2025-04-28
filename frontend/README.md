@@ -12,7 +12,11 @@ Install
 ```
 npm i
 ```
-start 
+frontend start 
 ```
-start run dev
+npm run dev
+```
+backend start
+```
+node index.js
 ```
