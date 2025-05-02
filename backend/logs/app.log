@@ -57,3 +57,17 @@
 2025-04-28T18:00:37.277Z [info]: Response sent for: POST /api/v1/skin with status: 200
 2025-04-28T18:00:53.162Z [info]: Incoming request: POST /api/v1/skin
 2025-04-28T18:01:01.290Z [info]: Response sent for: POST /api/v1/skin with status: 200
+2025-05-02T12:53:11.077Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-05-02T12:53:25.895Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-05-02T12:53:26.016Z [info]: Response sent for: POST /api/v2/auth/signin with status: 200
+2025-05-02T12:53:40.252Z [info]: Incoming request: GET /api/v3/appointments/doctor
+2025-05-02T12:54:30.041Z [info]: Incoming request: POST /api/v2/auth/signin
+2025-05-02T12:54:30.149Z [info]: Response sent for: POST /api/v2/auth/signin with status: 200
+2025-05-02T12:54:38.311Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-05-02T12:54:38.319Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
+2025-05-02T12:54:46.312Z [info]: Incoming request: GET /api/v3/appointments/doctor
+2025-05-02T12:54:46.318Z [info]: Response sent for: GET /api/v3/appointments/doctor with status: 200
+2025-05-02T12:54:50.826Z [info]: Incoming request: GET /api/v3/appointments/doctor
+2025-05-02T12:54:50.833Z [info]: Response sent for: GET /api/v3/appointments/doctor with status: 200
+2025-05-02T12:54:54.671Z [info]: Incoming request: GET /api/v3/appointments/patient
+2025-05-02T12:54:54.678Z [info]: Response sent for: GET /api/v3/appointments/patient with status: 200
