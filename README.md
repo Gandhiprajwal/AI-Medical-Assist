@@ -152,7 +152,6 @@ npm run dev
 ```bash
 cd backend
 npm install
-pip install -r requirements.txt
 node index.js
 ```
 
